@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function NewsletterForm() {
   const [status, setStatus] = useState<"idle" | "busy" | "done" | "error">("idle");
@@ -21,16 +22,22 @@ export function NewsletterForm() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setMessage(data.error || "Could not subscribe.");
+        const error = data.error || "Could not subscribe.";
+        setMessage(error);
         setStatus("error");
+        toast.error("Subscription failed", { description: error });
         return;
       }
       form.reset();
       setMessage("You are on the list.");
       setStatus("done");
+      toast.success("You are on the list", {
+        description: "We will email you when sets restock or release.",
+      });
     } catch {
       setMessage("Could not subscribe right now.");
       setStatus("error");
+      toast.error("Could not subscribe right now.");
     }
   }
 

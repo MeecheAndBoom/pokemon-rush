@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -54,6 +55,20 @@ export default function RootLayout({
         <div id="main" className="flex-1 flex flex-col">
           {children}
         </div>
+        <Toaster
+          position="bottom-right"
+          theme="light"
+          closeButton
+          toastOptions={{
+            classNames: {
+              toast:
+                "rounded-2xl border border-[var(--hairline)] bg-[var(--background)] text-[var(--foreground)] shadow-lg",
+              description: "text-[var(--ink-2)]",
+              actionButton: "bg-[var(--accent)] text-white",
+              cancelButton: "bg-[var(--surface-2)] text-[var(--ink-2)]",
+            },
+          }}
+        />
       </body>
     </html>
   );

@@ -7,7 +7,6 @@ export function SplitFeature({
   image,
   imageAlt,
   reverse = false,
-  eyebrow,
   title,
   body,
   points = [],
@@ -17,7 +16,6 @@ export function SplitFeature({
   image: string;
   imageAlt: string;
   reverse?: boolean;
-  eyebrow?: string;
   title: string;
   body: string[];
   points?: string[];
@@ -39,10 +37,7 @@ export function SplitFeature({
       </div>
 
       <div className={cn(reverse && "lg:order-1")}>
-        {eyebrow ? (
-          <p className="text-[13px] font-medium tracking-tight text-[var(--accent)]">{eyebrow}</p>
-        ) : null}
-        <h2 className="mt-3 text-[26px] font-semibold tracking-[-0.02em] sm:text-[34px]">
+        <h2 className="text-[26px] font-semibold tracking-[-0.02em] sm:text-[34px]">
           {title}
         </h2>
         {body.map((paragraph) => (

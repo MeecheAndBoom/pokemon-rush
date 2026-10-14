@@ -32,8 +32,28 @@ export const media = {
     mewtwo: "/images/art-mewtwo.webp",
     lucario: "/images/art-lucario.webp",
     greninja: "/images/art-greninja.webp",
+    luffy: "/images/art-luffy.webp",
+    zoro: "/images/art-zoro.webp",
+    sanji: "/images/art-sanji.webp",
+    nami: "/images/art-nami.webp",
+    goku: "/images/art-goku.webp",
+    vegeta: "/images/art-vegeta.webp",
+    naruto: "/images/art-naruto.webp",
+    tanjiro: "/images/art-tanjiro.webp",
+    deku: "/images/art-deku.webp",
+    yuji: "/images/art-yuji.webp",
   },
 };
+
+// Background slideshow for the home hero. Replace these with the final series
+// of images when they are ready — the component handles any number of slides.
+export const heroSlides = [
+  { src: media.section.store, alt: "Pokemon Rush shelves stocked with sealed trading card product" },
+  { src: media.section.pokemon, alt: "Sealed Japanese Pokémon booster boxes" },
+  { src: media.section["one-piece"], alt: "Sealed One Piece Card Game product" },
+  { src: media.section["weiss-schwarz"], alt: "Sealed Weiss Schwarz product" },
+  { src: media.section.shipping, alt: "Sealed orders being packed for dispatch" },
+];
 
 // Blog slug -> cover image
 export const guideCovers: Record<string, string> = {

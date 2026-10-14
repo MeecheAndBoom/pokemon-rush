@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 
 const inputClass =
   "mt-2 h-11 w-full rounded-lg border border-[var(--hairline)] bg-transparent px-3 text-[16px] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]";
@@ -30,8 +31,14 @@ export function ContactForm({
       if (!res.ok) throw new Error();
       form.reset();
       setStatus("sent");
+      toast.success("Message sent", {
+        description: "We will reply within one business day.",
+      });
     } catch {
       setStatus("error");
+      toast.error("Something went wrong", {
+        description: "Please try again, or call us on the number in the footer.",
+      });
     }
   }
 

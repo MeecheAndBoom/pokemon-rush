@@ -14,17 +14,18 @@ import {
 import { Container } from "@/components/layout/Container";
 import { ProductGrid } from "@/components/commerce/ProductGrid";
 import { SplitFeature } from "@/components/content/SplitFeature";
+import { HeroSlideshow } from "@/components/content/HeroSlideshow";
+import { DecorativeArt } from "@/components/content/DecorativeArt";
 import { FaqList } from "@/components/content/FaqList";
 import { Stars } from "@/components/content/Stars";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import {
-  catalog,
   filterProducts,
   getBrandCounts,
   getByBrand,
   getFeatured,
 } from "@/lib/catalog";
-import { media, guideCover } from "@/lib/media";
+import { media, guideCover, heroSlides } from "@/lib/media";
 import { reviewSummary, reviews } from "@/data/reviews";
 import { posts } from "@/data/posts";
 import { supportFaqs } from "@/data/faq";
@@ -99,105 +100,39 @@ export default function HomePage() {
   const onePiece = getByBrand("one-piece").slice(0, 8);
   const weiss = getByBrand("weiss-schwarz").slice(0, 4);
   const latestGuides = posts.slice(0, 3);
-  const stats = [
-    { value: `${catalog.length}+`, label: "Sealed products listed" },
-    { value: `${activeBrands.length}`, label: "Card brands stocked" },
-    { value: "40+", label: "Countries shipped to" },
-    { value: reviewSummary.average.toFixed(1), label: `Average from ${reviewSummary.count} reviews` },
-  ];
 
   return (
     <>
       {/* 1. Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[var(--tint-red)] via-[var(--tint-yellow)] to-[var(--background)] pt-14 pb-12 sm:pt-20 sm:pb-16">
-        <Image
-          src={media.art.pikachu}
-          alt=""
-          width={380}
-          height={380}
-          aria-hidden
-          className="pointer-events-none absolute -right-16 top-10 hidden opacity-[0.16] lg:block"
-        />
-        <Image
-          src={media.art.charizard}
-          alt=""
-          width={260}
-          height={260}
-          aria-hidden
-          className="pointer-events-none absolute -left-10 bottom-0 hidden opacity-[0.12] xl:block"
-        />
-        <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
-            <div>
-              <p className="inline-flex items-center gap-2 rounded-full bg-[var(--background)]/70 px-3.5 py-1.5 text-[13px] text-[var(--ink-2)] ring-1 ring-[var(--hairline)] backdrop-blur">
-                <BadgeCheck className="h-3.5 w-3.5 text-[var(--accent)]" strokeWidth={1.75} aria-hidden="true" />
-                Authentic stock, sourced through official distribution
-              </p>
-              <h1 className="mt-6 max-w-2xl text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] sm:text-[58px]">
-                Trading cards, sealed and ready to ship.
-              </h1>
-              <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[var(--ink-2)] sm:text-[19px]">
-                Factory-sealed Pokémon, One Piece, and Weiss Schwarz. Checked before dispatch and
-                packed to arrive exactly as it left — across Japan, North America, Europe, and beyond.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-[17px]">
-                <Link href="/shop" className="text-[var(--accent)] transition-opacity hover:opacity-70">
-                  Shop all cards
-                </Link>
-                <Link
-                  href="/talk-to-a-specialist"
-                  className="text-[var(--accent)] transition-opacity hover:opacity-70"
-                >
-                  Talk to a specialist
-                </Link>
-              </div>
-              <p className="mt-8 text-[14px] text-[var(--ink-2)]">
-                Free advice by phone on {site.phone} · {site.hours}
-              </p>
-            </div>
-
-            <div className="relative">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--background)]/70 ring-1 ring-[var(--hairline)] backdrop-blur">
-                <Image
-                  src={media.hero}
-                  alt="Sealed Pokémon Elite Trainer Box"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 48vw, 100vw"
-                  className="object-contain p-10"
-                />
-              </div>
-              <div className="absolute -bottom-5 -left-2 hidden rounded-2xl bg-[var(--background)] p-4 shadow-lg ring-1 ring-[var(--hairline)] sm:block">
-                <p className="text-[13px] text-[var(--ink-2)]">Inspected before every dispatch</p>
-                <div className="mt-2 flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-[var(--success)]" strokeWidth={2} aria-hidden="true" />
-                  <span className="text-[13px] tracking-tight">Seal, corners, and edges</span>
-                </div>
-              </div>
+      <section className="relative isolate overflow-hidden border-b border-[var(--hairline)] pt-16 pb-16 sm:pt-24 sm:pb-24">
+        <HeroSlideshow slides={heroSlides} className="absolute inset-0 -z-10" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-white via-white/90 to-white/40" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-white/60 via-transparent to-[var(--background)]" />
+        <Container className="relative">
+          <div className="max-w-2xl">
+            <h1 className="text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] sm:text-[58px]">
+              Trading cards, sealed and ready to ship.
+            </h1>
+            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[var(--ink-2)] sm:text-[19px]">
+              Factory-sealed Pokémon, One Piece, and Weiss Schwarz. Checked before dispatch and
+              packed to arrive exactly as it left — across Japan, North America, Europe, and beyond.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-[17px]">
+              <Link href="/shop" className="text-[var(--accent)] transition-opacity hover:opacity-70">
+                Shop all cards
+              </Link>
+              <Link
+                href="/talk-to-a-specialist"
+                className="text-[var(--accent)] transition-opacity hover:opacity-70"
+              >
+                Talk to a specialist
+              </Link>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* 2. Stats */}
-      <section className="border-y border-[var(--hairline)] bg-[var(--tint-blue)]">
-        <Container>
-          <dl className="grid grid-cols-2 gap-y-8 py-10 sm:grid-cols-4 sm:py-12">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <dt className="text-[28px] font-semibold tracking-[-0.02em] sm:text-[34px]">
-                  {stat.value}
-                </dt>
-                <dd className="mt-1.5 text-[13px] leading-relaxed text-[var(--ink-2)]">
-                  {stat.label}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Container>
-      </section>
-
-      {/* 3. Categories */}
+      {/* 2. Categories */}
       <section className="py-16 sm:py-24">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-6">
@@ -259,19 +194,20 @@ export default function HomePage() {
 
       {/* 5. Spotlight: Pokemon */}
       <section className="relative overflow-hidden border-t border-[var(--hairline)] bg-[var(--tint-yellow)] py-16 sm:py-24">
-        <Image
-          src={media.art.snorlax}
-          alt=""
-          width={320}
-          height={320}
-          aria-hidden
-          className="pointer-events-none absolute -right-12 -bottom-10 hidden opacity-[0.14] lg:block"
+        <DecorativeArt
+          src={media.art.pikachu}
+          opacity={0.16}
+          className="-right-8 top-8 w-[180px] sm:-right-14 sm:w-[260px] lg:w-[340px]"
         />
-        <Container>
+        <DecorativeArt
+          src={media.art.charizard}
+          opacity={0.1}
+          className="-left-6 bottom-0 w-[160px] sm:-left-12 sm:w-[220px] lg:w-[300px]"
+        />
+        <Container className="relative">
           <SplitFeature
             image={media.section.pokemon}
             imageAlt="Sealed Pokémon product"
-            eyebrow="Pokémon TCG"
             title="Your destination for Japanese Pokémon booster boxes"
             body={[
               "At Pokemon Rush we live and breathe this hobby. Our aim is simple: to get authentic Japanese Pokémon booster boxes into the hands of collectors and players wherever they are. Whether you are hunting an ultra-rare card, chasing a new release, or just love the feeling of cracking a sealed box, we have built the shop around that.",
@@ -290,14 +226,16 @@ export default function HomePage() {
       </section>
 
       {/* 6. One Piece adventure */}
-      <section className="border-t border-[var(--hairline)] bg-[var(--tint-blue)] py-16 sm:py-24">
-        <Container>
+      <section className="relative overflow-hidden border-t border-[var(--hairline)] bg-[var(--tint-blue)] py-16 sm:py-24">
+        <DecorativeArt
+          src={media.art.luffy}
+          opacity={0.12}
+          className="-right-6 top-10 w-[170px] sm:-right-10 sm:w-[240px] lg:w-[320px]"
+        />
+        <Container className="relative">
           <div className="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
             <div>
-              <p className="text-[13px] font-medium tracking-tight text-[var(--accent)]">
-                One Piece Card Game
-              </p>
-              <h2 className="mt-3 text-[30px] font-semibold tracking-[-0.02em] sm:text-[40px]">
+              <h2 className="text-[30px] font-semibold tracking-[-0.02em] sm:text-[40px]">
                 Join the One Piece adventure
               </h2>
               <div className="mt-6 space-y-4 text-[16px] leading-relaxed text-[var(--ink-2)]">
@@ -393,15 +331,12 @@ export default function HomePage() {
 
       {/* 7. Featured shelf */}
       <section className="relative overflow-hidden border-y border-[var(--hairline)] bg-[var(--tint-purple)] py-16 sm:py-24">
-        <Image
-          src={media.art.gengar}
-          alt=""
-          width={300}
-          height={300}
-          aria-hidden
-          className="pointer-events-none absolute -left-10 top-6 hidden opacity-[0.12] lg:block"
+        <DecorativeArt
+          src={media.art.goku}
+          opacity={0.1}
+          className="-left-6 top-4 w-[160px] sm:-left-12 sm:w-[220px] lg:w-[300px]"
         />
-        <Container>
+        <Container className="relative">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
               <h2 className="text-[28px] font-semibold tracking-[-0.02em] sm:text-[36px]">
@@ -426,13 +361,17 @@ export default function HomePage() {
       </section>
 
       {/* 8. Spotlight: Weiss Schwarz */}
-      <section className="py-16 sm:py-24">
-        <Container>
+      <section className="relative overflow-hidden py-16 sm:py-24">
+        <DecorativeArt
+          src={media.art.tanjiro}
+          opacity={0.1}
+          className="-right-6 top-2 w-[150px] sm:-right-12 sm:w-[210px] lg:w-[280px]"
+        />
+        <Container className="relative">
           <SplitFeature
             reverse
             image={media.section["weiss-schwarz"]}
             imageAlt="Sealed Weiss Schwarz product"
-            eyebrow="Weiss Schwarz"
             title="A crossover game with deep licences"
             body={[
               "Weiss Schwarz is built almost entirely around licensed properties, from anime series to games. That makes it a different kind of collecting: you are often collecting a series first and a game second.",
@@ -498,8 +437,13 @@ export default function HomePage() {
       </section>
 
       {/* 10. Reviews */}
-      <section className="border-t border-[var(--hairline)] bg-[var(--tint-pink)] py-16 sm:py-24">
-        <Container>
+      <section className="relative overflow-hidden border-t border-[var(--hairline)] bg-[var(--tint-pink)] py-16 sm:py-24">
+        <DecorativeArt
+          src={media.art.zoro}
+          opacity={0.07}
+          className="-left-6 bottom-0 w-[150px] sm:-left-14 sm:w-[210px] lg:w-[290px]"
+        />
+        <Container className="relative">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <h2 className="text-[28px] font-semibold tracking-[-0.02em] sm:text-[36px]">
@@ -602,15 +546,12 @@ export default function HomePage() {
 
       {/* 13. Long-form: Japanese Pokemon */}
       <section className="relative overflow-hidden border-t border-[var(--hairline)] bg-[var(--tint-yellow)] py-16 sm:py-20">
-        <Image
+        <DecorativeArt
           src={media.art.eevee}
-          alt=""
-          width={260}
-          height={260}
-          aria-hidden
-          className="pointer-events-none absolute -right-8 bottom-0 hidden opacity-[0.14] lg:block"
+          opacity={0.15}
+          className="-right-6 bottom-0 w-[150px] sm:-right-10 sm:w-[200px] lg:w-[280px]"
         />
-        <Container>
+        <Container className="relative">
           <div className="mx-auto max-w-3xl">
             <h2 className="text-[26px] font-semibold leading-tight tracking-[-0.02em] sm:text-[34px]">
               Japanese Pokémon cards, sourced properly

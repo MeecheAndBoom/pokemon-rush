@@ -54,8 +54,7 @@ export default function FinanceDisclosurePage() {
   return (
     <div className="pt-14 pb-16 sm:pt-20">
       <Container size="narrow">
-        <p className="text-[13px] text-[var(--ink-2)]">Legal</p>
-        <h1 className="mt-3 text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
+        <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
           Finance disclosure
         </h1>
         <p className="mt-5 text-[16px] leading-relaxed text-[var(--ink-2)]">

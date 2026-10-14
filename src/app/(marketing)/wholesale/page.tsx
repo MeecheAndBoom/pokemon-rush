@@ -81,8 +81,7 @@ export default function WholesalePage() {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className="text-[13px] text-[var(--ink-2)]">Trade</p>
-            <h1 className="mt-3 text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
+            <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
               Wholesale & bulk
             </h1>
             <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">

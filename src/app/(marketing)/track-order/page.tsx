@@ -101,8 +101,7 @@ export default function TrackOrderPage() {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div>
-            <p className="text-[13px] text-[var(--ink-2)]">Order status</p>
-            <h1 className="mt-3 text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
+            <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
               Track an order
             </h1>
             <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">

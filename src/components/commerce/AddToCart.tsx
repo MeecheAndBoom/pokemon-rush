@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { addToCart } from "@/lib/cart-store";
 import type { CatalogProduct } from "@/lib/catalog";
 
@@ -19,6 +20,13 @@ export function AddToCart({ product }: { product: CatalogProduct }) {
     });
     setAdded(true);
     window.setTimeout(() => setAdded(false), 1800);
+    toast.success("Added to cart", {
+      description: product.name,
+      action: {
+        label: "View cart",
+        onClick: () => router.push("/cart"),
+      },
+    });
   }
 
   return (

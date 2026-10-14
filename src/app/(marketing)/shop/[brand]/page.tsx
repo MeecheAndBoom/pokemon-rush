@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { ProductGrid } from "@/components/commerce/ProductGrid";
 import { Pagination } from "@/components/commerce/Pagination";
 import { SearchBox } from "@/components/layout/SearchBox";
+import { DecorativeArt } from "@/components/content/DecorativeArt";
 import { brands, getByBrand, languages, productTypes } from "@/lib/catalog";
 import { media } from "@/lib/media";
 import { cn } from "@/lib/utils";
@@ -48,10 +48,16 @@ export default async function BrandPage({
   if (!meta) notFound();
 
   const brandArt: Record<string, string | undefined> = {
-    pokemon: media.art.charizard,
-    "one-piece": media.art.greninja,
-    "weiss-schwarz": media.art.lucario,
+    pokemon: media.art.pikachu,
+    "one-piece": media.art.luffy,
+    "weiss-schwarz": media.art.tanjiro,
     accessories: media.art.snorlax,
+  };
+  const brandArtSecondary: Record<string, string | undefined> = {
+    pokemon: media.art.charizard,
+    "one-piece": media.art.zoro,
+    "weiss-schwarz": media.art.deku,
+    accessories: media.art.mewtwo,
   };
   const brandTint: Record<string, string> = {
     pokemon: "from-[var(--tint-yellow)]",
@@ -60,6 +66,7 @@ export default async function BrandPage({
     accessories: "from-[var(--tint-green)]",
   };
   const heroArt = brandArt[brand];
+  const heroArtSecondary = brandArtSecondary[brand];
   const heroTint = brandTint[brand] ?? "from-[var(--tint-blue)]";
 
   let all = getByBrand(brand);
@@ -110,16 +117,20 @@ export default async function BrandPage({
         )}
       >
         {heroArt ? (
-          <Image
+          <DecorativeArt
             src={heroArt}
-            alt=""
-            width={320}
-            height={320}
-            aria-hidden
-            className="pointer-events-none absolute -right-10 top-2 hidden opacity-[0.13] lg:block"
+            opacity={0.13}
+            className="-right-8 -top-4 w-[170px] sm:-right-12 sm:w-[250px] lg:w-[330px]"
           />
         ) : null}
-        <Container>
+        {heroArtSecondary ? (
+          <DecorativeArt
+            src={heroArtSecondary}
+            opacity={0.08}
+            className="-left-8 -bottom-8 w-[150px] sm:-left-14 sm:w-[210px] lg:w-[290px]"
+          />
+        ) : null}
+        <Container className="relative">
           <p className="text-[13px] text-[var(--ink-2)]">
             <Link href="/shop" className="hover:text-[var(--foreground)]">
               Shop

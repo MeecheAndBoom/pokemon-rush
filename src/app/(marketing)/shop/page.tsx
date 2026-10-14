@@ -1,10 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { ProductGrid } from "@/components/commerce/ProductGrid";
 import { Pagination } from "@/components/commerce/Pagination";
 import { SearchBox } from "@/components/layout/SearchBox";
+import { DecorativeArt } from "@/components/content/DecorativeArt";
 import { brands, filterProducts, languages, productTypes } from "@/lib/catalog";
 import { media } from "@/lib/media";
 import { cn } from "@/lib/utils";
@@ -74,15 +74,12 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
   return (
     <div className="pb-16">
       <section className="relative overflow-hidden border-b border-[var(--hairline)] bg-gradient-to-b from-[var(--tint-blue)] to-[var(--background)]">
-        <Image
-          src={media.art.charizard}
-          alt=""
-          width={320}
-          height={320}
-          aria-hidden
-          className="pointer-events-none absolute -right-10 top-0 hidden opacity-[0.13] lg:block"
+        <DecorativeArt
+          src={media.art.goku}
+          opacity={0.13}
+          className="-right-8 -top-6 w-[170px] sm:-right-12 sm:w-[250px] lg:w-[330px]"
         />
-        <Container className="pt-12 pb-10 sm:pt-16">
+        <Container className="relative pt-12 pb-10 sm:pt-16">
           <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">Shop</h1>
           <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">
             {all.length} sealed {all.length === 1 ? "product" : "products"} available. Every item is

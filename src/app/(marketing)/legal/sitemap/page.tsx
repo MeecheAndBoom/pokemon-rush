@@ -10,27 +10,20 @@ export const metadata: Metadata = {
 };
 
 export default function SitemapPage() {
+  // The footer navigation already carries Shop, Company, Help, and Legal groups.
+  // Shop and Legal are rebuilt here with the full catalogue, so they are filtered
+  // out of the spread to avoid the page listing them twice.
+  const shopLinks: { label: string; href: string }[] = [
+    { label: "All products", href: "/shop" },
+    ...brands.map((b) => ({ label: b.label, href: `/shop/${b.slug}` })),
+    ...productTypes.map((t) => ({ label: t.label, href: `/shop?type=${t.slug}` })),
+    ...languages.map((l) => ({ label: l.label, href: `/shop?language=${l.slug}` })),
+  ];
+  const legalLinks = footerNav.find((section) => section.title === "Legal")?.links ?? [];
   const sections: { title: string; links: { label: string; href: string }[] }[] = [
-    {
-      title: "Shop",
-      links: [
-        { label: "All products", href: "/shop" },
-        ...brands.map((b) => ({ label: b.label, href: `/shop/${b.slug}` })),
-        ...productTypes.map((t) => ({ label: t.label, href: `/shop?type=${t.slug}` })),
-        ...languages.map((l) => ({ label: l.label, href: `/shop?language=${l.slug}` })),
-      ],
-    },
-    ...footerNav,
-    {
-      title: "Legal",
-      links: [
-        { label: "Terms & conditions", href: "/legal/terms" },
-        { label: "Privacy policy", href: "/legal/privacy" },
-        { label: "Cookies policy", href: "/legal/cookies" },
-        { label: "Accessibility", href: "/legal/accessibility" },
-        { label: "Disclaimer", href: "/legal/disclaimer" },
-      ],
-    },
+    { title: "Shop", links: shopLinks },
+    ...footerNav.filter((section) => section.title !== "Shop" && section.title !== "Legal"),
+    { title: "Legal", links: legalLinks },
   ];
 
   return (

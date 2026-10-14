@@ -47,8 +47,7 @@ export default function BlogPage() {
       <Container>
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <p className="text-[13px] text-[var(--ink-2)]">Journal</p>
-            <h1 className="mt-3 text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
+            <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
               Blog & guides
             </h1>
             <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">
