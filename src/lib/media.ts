@@ -23,6 +23,16 @@ export const media = {
     cases: "/images/blog-case.webp",
     weiss: "/images/blog-weiss.webp",
   },
+  art: {
+    pikachu: "/images/art-pikachu.webp",
+    charizard: "/images/art-charizard.webp",
+    gengar: "/images/art-gengar.webp",
+    eevee: "/images/art-eevee.webp",
+    snorlax: "/images/art-snorlax.webp",
+    mewtwo: "/images/art-mewtwo.webp",
+    lucario: "/images/art-lucario.webp",
+    greninja: "/images/art-greninja.webp",
+  },
 };
 
 // Blog slug -> cover image

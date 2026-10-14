@@ -212,7 +212,7 @@ export default function TrackOrderPage() {
         ) : null}
       </Container>
 
-      <section className="mt-20 border-y border-[var(--hairline)] bg-[var(--surface-2)] py-16">
+      <section className="mt-20 border-y border-[var(--hairline)] bg-[var(--tint-green)] py-16">
         <Container>
           <h2 className="text-[26px] font-semibold tracking-[-0.02em] sm:text-[32px]">
             What the statuses mean

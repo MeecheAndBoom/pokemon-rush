@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { AddToCart } from "@/components/commerce/AddToCart";
+import { ProductGallery } from "@/components/commerce/ProductGallery";
 import { ProductGrid } from "@/components/commerce/ProductGrid";
 import { catalog, formatPrice, getProduct, brandLabels } from "@/lib/catalog";
 
@@ -78,36 +78,7 @@ export default async function ProductPage({ params }: { params: Params }) {
 
         <div className="mt-8 grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <div className="relative aspect-square overflow-hidden rounded-3xl bg-[var(--surface-2)]">
-              {product.images[0] ? (
-                <Image
-                  src={product.images[0].url}
-                  alt={product.images[0].alt || product.name}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-contain p-10"
-                />
-              ) : null}
-            </div>
-            {product.images.length > 1 ? (
-              <div className="mt-4 grid grid-cols-4 gap-3">
-                {product.images.slice(1, 5).map((img) => (
-                  <div
-                    key={img.url}
-                    className="relative aspect-square overflow-hidden rounded-xl bg-[var(--surface-2)]"
-                  >
-                    <Image
-                      src={img.url}
-                      alt={img.alt || product.name}
-                      fill
-                      sizes="15vw"
-                      className="object-contain p-2"
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : null}
+            <ProductGallery images={product.images} name={product.name} />
           </div>
 
           <div className="lg:pt-6">

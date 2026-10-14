@@ -4,6 +4,7 @@ import {
   BadgeCheck,
   Boxes,
   CreditCard,
+  ExternalLink,
   Headphones,
   PackageCheck,
   RotateCcw,
@@ -16,7 +17,13 @@ import { SplitFeature } from "@/components/content/SplitFeature";
 import { FaqList } from "@/components/content/FaqList";
 import { Stars } from "@/components/content/Stars";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
-import { catalog, filterProducts, getBrandCounts, getFeatured } from "@/lib/catalog";
+import {
+  catalog,
+  filterProducts,
+  getBrandCounts,
+  getByBrand,
+  getFeatured,
+} from "@/lib/catalog";
 import { media, guideCover } from "@/lib/media";
 import { reviewSummary, reviews } from "@/data/reviews";
 import { posts } from "@/data/posts";
@@ -32,12 +39,17 @@ const valueProps = [
   {
     icon: Truck,
     title: "Shipping to 40+ countries",
-    body: "Orders leave our facility within one business day. Tracking details are emailed to you as soon as your parcel is on its way.",
+    body: "Orders leave our facility within one business day. Tracking details are emailed as soon as your parcel is on its way.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Guaranteed authentic",
+    body: "We source through official distribution only. No repacks, no reseals, no “mystery” lots dressed up as sealed product.",
   },
   {
     icon: Headphones,
     title: "Talk to a person",
-    body: "Not sure which set to buy, or whether to hold a case? Call us or send a message and a collector on our team will answer.",
+    body: "Not sure which set to buy, or whether to hold a case? Call us or send a message and a collector on our team answers.",
   },
 ];
 
@@ -71,30 +83,53 @@ const guarantees = [
   { icon: Boxes, label: "Wholesale & bulk", href: "/wholesale" },
 ];
 
+const trustedResources = [
+  { label: "Official Pokémon", href: "https://www.pokemon.com/" },
+  { label: "Pokémon TCG", href: "https://tcg.pokemon.com/" },
+  { label: "PSA grading", href: "https://www.psacard.com/" },
+  { label: "Beckett grading", href: "https://www.beckett.com/grading" },
+  { label: "CGC Cards", href: "https://www.cgccards.com/" },
+];
+
 export default function HomePage() {
   const featured = getFeatured(8);
   const brandCounts = getBrandCounts();
   const activeBrands = brandCounts.filter((brand) => brand.count > 0);
   const japanese = filterProducts({ language: "japanese" }).slice(0, 8);
+  const onePiece = getByBrand("one-piece").slice(0, 8);
+  const weiss = getByBrand("weiss-schwarz").slice(0, 4);
   const latestGuides = posts.slice(0, 3);
   const stats = [
     { value: `${catalog.length}+`, label: "Sealed products listed" },
     { value: `${activeBrands.length}`, label: "Card brands stocked" },
     { value: "40+", label: "Countries shipped to" },
-    {
-      value: reviewSummary.average.toFixed(1),
-      label: `Average from ${reviewSummary.count} reviews`,
-    },
+    { value: reviewSummary.average.toFixed(1), label: `Average from ${reviewSummary.count} reviews` },
   ];
 
   return (
     <>
       {/* 1. Hero */}
-      <section className="pt-14 pb-12 sm:pt-20 sm:pb-16">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[var(--tint-red)] via-[var(--tint-yellow)] to-[var(--background)] pt-14 pb-12 sm:pt-20 sm:pb-16">
+        <Image
+          src={media.art.pikachu}
+          alt=""
+          width={380}
+          height={380}
+          aria-hidden
+          className="pointer-events-none absolute -right-16 top-10 hidden opacity-[0.16] lg:block"
+        />
+        <Image
+          src={media.art.charizard}
+          alt=""
+          width={260}
+          height={260}
+          aria-hidden
+          className="pointer-events-none absolute -left-10 bottom-0 hidden opacity-[0.12] xl:block"
+        />
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
             <div>
-              <p className="inline-flex items-center gap-2 rounded-full border border-[var(--hairline)] px-3.5 py-1.5 text-[13px] text-[var(--ink-2)]">
+              <p className="inline-flex items-center gap-2 rounded-full bg-[var(--background)]/70 px-3.5 py-1.5 text-[13px] text-[var(--ink-2)] ring-1 ring-[var(--hairline)] backdrop-blur">
                 <BadgeCheck className="h-3.5 w-3.5 text-[var(--accent)]" strokeWidth={1.75} aria-hidden="true" />
                 Authentic stock, sourced through official distribution
               </p>
@@ -122,7 +157,7 @@ export default function HomePage() {
             </div>
 
             <div className="relative">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--surface-2)]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--background)]/70 ring-1 ring-[var(--hairline)] backdrop-blur">
                 <Image
                   src={media.hero}
                   alt="Sealed Pokémon Elite Trainer Box"
@@ -132,7 +167,7 @@ export default function HomePage() {
                   className="object-contain p-10"
                 />
               </div>
-              <div className="absolute -bottom-5 -left-2 hidden rounded-2xl border border-[var(--hairline)] bg-[var(--background)] p-4 shadow-sm sm:block">
+              <div className="absolute -bottom-5 -left-2 hidden rounded-2xl bg-[var(--background)] p-4 shadow-lg ring-1 ring-[var(--hairline)] sm:block">
                 <p className="text-[13px] text-[var(--ink-2)]">Inspected before every dispatch</p>
                 <div className="mt-2 flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-[var(--success)]" strokeWidth={2} aria-hidden="true" />
@@ -145,7 +180,7 @@ export default function HomePage() {
       </section>
 
       {/* 2. Stats */}
-      <section className="border-y border-[var(--hairline)] bg-[var(--surface-2)]">
+      <section className="border-y border-[var(--hairline)] bg-[var(--tint-blue)]">
         <Container>
           <dl className="grid grid-cols-2 gap-y-8 py-10 sm:grid-cols-4 sm:py-12">
             {stats.map((stat) => (
@@ -185,16 +220,16 @@ export default function HomePage() {
               <Link
                 key={brand.slug}
                 href={`/shop/${brand.slug}`}
-                className="group relative flex h-72 flex-col justify-end overflow-hidden rounded-3xl"
+                className="group relative flex h-72 flex-col justify-end overflow-hidden rounded-3xl bg-[var(--surface-2)]"
               >
                 <Image
                   src={media.brand[brand.slug] ?? media.hero}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                  className="object-contain p-10 transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent" />
                 <div className="relative p-6 text-white">
                   <p className="text-[20px] font-semibold tracking-tight">{brand.label}</p>
                   <p className="mt-1 text-[13px] text-white/80">
@@ -207,31 +242,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 4. Spotlight: Pokemon */}
-      <section className="border-t border-[var(--hairline)] py-16 sm:py-24">
-        <Container>
-          <SplitFeature
-            image={media.section.pokemon}
-            imageAlt="Sealed Pokémon product"
-            eyebrow="Pokémon TCG"
-            title="The set you want, still sealed"
-            body={[
-              "Booster boxes, Elite Trainer Boxes, booster bundles, and sealed cases across English, Japanese, and Chinese print runs. Current releases sit alongside older sets that are still collectible.",
-              "Japanese product is prized for its print consistency and artwork; English print runs give you the widest single set. We stock both, and we list the language on every item so there are no surprises.",
-            ]}
-            points={[
-              "Japanese and English print runs listed side by side",
-              "Pre-orders for releases that have not shipped yet",
-              "Seal and corners verified before packing",
-            ]}
-            href="/shop/pokemon"
-            cta="Browse Pokémon"
-          />
-        </Container>
-      </section>
-
-      {/* 5. New in */}
-      <section className="pb-16 sm:pb-24">
+      {/* 4. New in */}
+      <section className="border-t border-[var(--hairline)] py-16 sm:py-20">
         <Container>
           <div className="flex items-baseline justify-between gap-6">
             <h2 className="text-[28px] font-semibold tracking-[-0.02em] sm:text-[36px]">New in</h2>
@@ -245,37 +257,130 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 5b. Spotlight: One Piece */}
-      <section className="border-t border-[var(--hairline)] py-16 sm:py-24">
+      {/* 5. Spotlight: Pokemon */}
+      <section className="relative overflow-hidden border-t border-[var(--hairline)] bg-[var(--tint-yellow)] py-16 sm:py-24">
+        <Image
+          src={media.art.snorlax}
+          alt=""
+          width={320}
+          height={320}
+          aria-hidden
+          className="pointer-events-none absolute -right-12 -bottom-10 hidden opacity-[0.14] lg:block"
+        />
         <Container>
           <SplitFeature
-            reverse
-            image={media.section["one-piece"]}
-            imageAlt="Sealed One Piece Card Game product"
-            eyebrow="One Piece Card Game"
-            title="Built for players and long-term collectors"
+            image={media.section.pokemon}
+            imageAlt="Sealed Pokémon product"
+            eyebrow="Pokémon TCG"
+            title="Your destination for Japanese Pokémon booster boxes"
             body={[
-              "From Romance Dawn through the latest releases, we carry sealed One Piece booster boxes and cases in both English and Japanese. Each set introduces new leaders, powerful characters, and rare pulls that keep the game moving.",
-              "If you are building a deck, a few boxes will get you there. If you are holding for the long run, a factory-sealed case is the cleanest way to own a set unsearched and untouched.",
+              "At Pokemon Rush we live and breathe this hobby. Our aim is simple: to get authentic Japanese Pokémon booster boxes into the hands of collectors and players wherever they are. Whether you are hunting an ultra-rare card, chasing a new release, or just love the feeling of cracking a sealed box, we have built the shop around that.",
+              "What makes us different is that we collect too. We understand the hunt, and we know what a factory seal should look like. Every box we sell is sealed, inspected, and sourced directly — no middlemen, no resealing, no surprises.",
             ]}
             points={[
-              "English and Japanese booster boxes",
-              "Factory-sealed cases for long-term holds",
-              "Every case checked for intact factory tape",
+              "Japanese sets you will not find in a local store",
+              "Guaranteed authenticity — official product only",
+              "Boosted and bundled to survive transit",
+              "Advice from people who actually collect",
             ]}
-            href="/shop/one-piece"
-            cta="Shop One Piece"
+            href="/shop/pokemon"
+            cta="Shop Pokémon"
           />
         </Container>
       </section>
 
-      {/* 6. Value props */}
-      <section className="border-t border-[var(--hairline)] py-16 sm:py-24">
+      {/* 6. One Piece adventure */}
+      <section className="border-t border-[var(--hairline)] bg-[var(--tint-blue)] py-16 sm:py-24">
         <Container>
-          <div className="grid gap-12 sm:grid-cols-3 sm:gap-10">
+          <div className="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
+            <div>
+              <p className="text-[13px] font-medium tracking-tight text-[var(--accent)]">
+                One Piece Card Game
+              </p>
+              <h2 className="mt-3 text-[30px] font-semibold tracking-[-0.02em] sm:text-[40px]">
+                Join the One Piece adventure
+              </h2>
+              <div className="mt-6 space-y-4 text-[16px] leading-relaxed text-[var(--ink-2)]">
+                <p>
+                  Set sail with a trading card game built on the world of One Piece. Every release
+                  blends strategic play, collectible value, and artwork pulled straight from the
+                  series, giving players and collectors something to chase.
+                </p>
+                <p>
+                  Japanese and English releases each have their own appeal. Japanese sets are prized
+                  for vivid printing and exclusive artwork; English sets keep the game accessible
+                  and consistent for tournament play. We stock both, and we describe exactly which
+                  you are buying.
+                </p>
+                <p>
+                  Factory-sealed product is the honest way to buy. No repacks, no reseals, no
+                  guessing whether someone has already been through the box. If you play, a booster
+                  box gets you a set. If you collect, a sealed case is the long-term hold.
+                </p>
+              </div>
+              <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Booster boxes from Romance Dawn onward",
+                  "Sealed English and Japanese cases",
+                  "New releases added as they print",
+                  "Advice on sets before you commit",
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-3 text-[15px] text-[var(--ink-2)]">
+                    <span
+                      aria-hidden="true"
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
+                    />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/shop/one-piece"
+                className="mt-8 inline-flex h-11 items-center justify-center rounded-full bg-[var(--accent)] px-6 text-[15px] font-medium text-white transition-transform duration-150 ease-out active:scale-[0.97]"
+              >
+                Shop One Piece
+              </Link>
+            </div>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-[var(--background)]/60 ring-1 ring-[var(--hairline)]">
+              <Image
+                src={media.section["one-piece"]}
+                alt="Sealed One Piece Card Game product"
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-contain p-10"
+              />
+            </div>
+          </div>
+          <div className="mt-14">
+            <div className="flex items-baseline justify-between gap-6">
+              <h3 className="text-[22px] font-semibold tracking-tight">One Piece bestsellers</h3>
+              <Link href="/shop/one-piece" className="text-[15px] text-[var(--accent)] hover:opacity-70">
+                View all
+              </Link>
+            </div>
+            <div className="mt-8">
+              <ProductGrid products={onePiece} />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 6. Value props */}
+      <section className="py-16 sm:py-24">
+        <Container>
+          <div className="max-w-2xl">
+            <h2 className="text-[28px] font-semibold tracking-[-0.02em] sm:text-[36px]">
+              Why collectors buy from us
+            </h2>
+            <p className="mt-4 text-[16px] leading-relaxed text-[var(--ink-2)]">
+              We are collectors first. That shapes every decision we make about what we stock and
+              how it leaves the door.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {valueProps.map((prop) => (
               <div key={prop.title}>
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-[var(--surface-2)] text-[var(--accent)]">
+                <span className="grid h-11 w-11 place-items-center rounded-full bg-[var(--accent-tint)] text-[var(--accent)]">
                   <prop.icon className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
                 </span>
                 <h3 className="mt-5 text-[17px] font-semibold tracking-tight">{prop.title}</h3>
@@ -287,7 +392,15 @@ export default function HomePage() {
       </section>
 
       {/* 7. Featured shelf */}
-      <section className="bg-[var(--surface-2)] py-16 sm:py-24">
+      <section className="relative overflow-hidden border-y border-[var(--hairline)] bg-[var(--tint-purple)] py-16 sm:py-24">
+        <Image
+          src={media.art.gengar}
+          alt=""
+          width={300}
+          height={300}
+          aria-hidden
+          className="pointer-events-none absolute -left-10 top-6 hidden opacity-[0.12] lg:block"
+        />
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
@@ -316,6 +429,7 @@ export default function HomePage() {
       <section className="py-16 sm:py-24">
         <Container>
           <SplitFeature
+            reverse
             image={media.section["weiss-schwarz"]}
             imageAlt="Sealed Weiss Schwarz product"
             eyebrow="Weiss Schwarz"
@@ -332,14 +446,19 @@ export default function HomePage() {
             href="/shop/weiss-schwarz"
             cta="Explore Weiss Schwarz"
           />
+          {weiss.length > 0 ? (
+            <div className="mt-14">
+              <ProductGrid products={weiss} />
+            </div>
+          ) : null}
         </Container>
       </section>
 
       {/* 9. Process */}
-      <section className="border-t border-[var(--hairline)] py-16 sm:py-24">
+      <section className="border-t border-[var(--hairline)] bg-[var(--tint-green)] py-16 sm:py-24">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-            <div className="relative overflow-hidden rounded-3xl bg-[var(--surface-2)]">
+            <div className="relative overflow-hidden rounded-3xl bg-[var(--background)]">
               <div className="relative aspect-[4/5]">
                 <Image
                   src={media.section.shipping}
@@ -379,7 +498,7 @@ export default function HomePage() {
       </section>
 
       {/* 10. Reviews */}
-      <section className="border-t border-[var(--hairline)] bg-[var(--surface-2)] py-16 sm:py-24">
+      <section className="border-t border-[var(--hairline)] bg-[var(--tint-pink)] py-16 sm:py-24">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -388,30 +507,31 @@ export default function HomePage() {
               </h2>
               <div className="mt-4 flex items-center gap-3">
                 <Stars rating={reviewSummary.average} size={16} />
-                <p className="text-[14px] text-[var(--ink-2)]">
-                  {reviewSummary.average.toFixed(1)} out of 5 · {reviewSummary.count} reviews
-                </p>
+                <span className="text-[14px] text-[var(--ink-2)]">
+                  {reviewSummary.average.toFixed(1)} average from {reviewSummary.count} reviews
+                </span>
               </div>
             </div>
             <Link href="/reviews" className="text-[15px] text-[var(--accent)] hover:opacity-70">
               Read all reviews
             </Link>
           </div>
-
-          <ul className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-3">
+          <div className="mt-12 grid gap-8 sm:grid-cols-3">
             {reviews.slice(0, 3).map((review) => (
-              <li key={`${review.name}-${review.date}`} className="flex flex-col">
+              <figure
+                key={review.name}
+                className="flex flex-col rounded-3xl bg-[var(--background)] p-7 ring-1 ring-[var(--hairline)]"
+              >
                 <Stars rating={review.rating} size={15} />
-                <h3 className="mt-4 text-[16px] font-semibold tracking-tight">{review.title}</h3>
-                <p className="mt-3 flex-1 text-[15px] leading-relaxed text-[var(--ink-2)]">
-                  &ldquo;{review.body}&rdquo;
-                </p>
-                <p className="mt-5 text-[13px] text-[var(--ink-2)]">
-                  {review.name} · {review.location}
-                </p>
-              </li>
+                <blockquote className="mt-5 flex-1 text-[15px] leading-relaxed text-[var(--ink-2)]">
+                  {review.body}
+                </blockquote>
+                <figcaption className="mt-6 text-[13px] text-[var(--ink-2)]">
+                  <span className="text-[var(--foreground)]">{review.name}</span> · {review.location}
+                </figcaption>
+              </figure>
             ))}
-          </ul>
+          </div>
         </Container>
       </section>
 
@@ -432,7 +552,6 @@ export default function HomePage() {
               All guides
             </Link>
           </div>
-
           <div className="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {latestGuides.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
@@ -452,7 +571,6 @@ export default function HomePage() {
                 <p className="mt-3 text-[15px] leading-relaxed text-[var(--ink-2)]">
                   {post.excerpt}
                 </p>
-                <p className="mt-4 text-[13px] text-[var(--ink-2)]">{post.readingMinutes} min read</p>
               </Link>
             ))}
           </div>
@@ -482,7 +600,91 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 13. Guarantees */}
+      {/* 13. Long-form: Japanese Pokemon */}
+      <section className="relative overflow-hidden border-t border-[var(--hairline)] bg-[var(--tint-yellow)] py-16 sm:py-20">
+        <Image
+          src={media.art.eevee}
+          alt=""
+          width={260}
+          height={260}
+          aria-hidden
+          className="pointer-events-none absolute -right-8 bottom-0 hidden opacity-[0.14] lg:block"
+        />
+        <Container>
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-[26px] font-semibold leading-tight tracking-[-0.02em] sm:text-[34px]">
+              Japanese Pokémon cards, sourced properly
+            </h2>
+            <div className="mt-6 space-y-4 text-[16px] leading-relaxed text-[var(--ink-2)]">
+              <p>
+                If you are after Japanese Pokémon cards, we are built for that. Our range covers
+                promo cards, booster boxes, graded cards, and the latest Japanese releases — each
+                one inspected so what you receive matches what we describe.
+              </p>
+              <p>
+                New stock lands regularly, which means there is always something to complete a
+                master set or add to a collection. Whether you are opening for the chase or keeping
+                product sealed, the same standard applies: authentic, and packed to survive the trip.
+              </p>
+              <p>
+                Beyond the shop, we publish collecting guides and notes on grading and storage, so
+                you can look after what you buy long after it arrives.
+              </p>
+            </div>
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+              {[
+                "Promo cards and special boxes",
+                "Booster boxes and sealed cases",
+                "Japanese and English print runs",
+                "Graded singles on request",
+              ].map((point) => (
+                <li key={point} className="flex items-start gap-3 text-[15px] text-[var(--ink-2)]">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
+                  />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      {/* 14. Trusted resources */}
+      <section className="border-t border-[var(--hairline)] py-16 sm:py-20">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div>
+              <h2 className="text-[26px] font-semibold tracking-[-0.02em] sm:text-[32px]">
+                Trusted resources
+              </h2>
+              <p className="mt-4 text-[16px] leading-relaxed text-[var(--ink-2)]">
+                The places we point collectors to when it comes to sets, grading, and
+                authentication. We do not control these sites and a link is not an endorsement, but
+                they are where the hobby actually lives.
+              </p>
+            </div>
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {trustedResources.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between gap-4 rounded-2xl border border-[var(--hairline)] px-5 py-4 text-[15px] transition-colors hover:border-[var(--foreground)]"
+                  >
+                    <span>{item.label}</span>
+                    <ExternalLink className="h-4 w-4 shrink-0 text-[var(--ink-2)]" strokeWidth={1.75} aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      {/* 15. Guarantees */}
       <section className="border-t border-[var(--hairline)] py-12">
         <Container>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -492,7 +694,7 @@ export default function HomePage() {
                 href={item.href}
                 className="group flex items-center gap-4 rounded-2xl border border-[var(--hairline)] p-5 transition-colors hover:border-[var(--foreground)]"
               >
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--surface-2)] text-[var(--accent)]">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--accent-tint)] text-[var(--accent)]">
                   <item.icon className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden="true" />
                 </span>
                 <span className="text-[15px] tracking-tight">{item.label}</span>
@@ -502,35 +704,35 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 13b. CTA band with background image */}
-      <section className="relative mt-16 overflow-hidden sm:mt-24">
+      {/* 16. CTA band */}
+      <section className="relative mt-8 overflow-hidden">
         <Image
-          src={media.section.store}
+          src={media.section.storage}
           alt=""
           fill
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[color-mix(in_srgb,var(--foreground)_78%,transparent)]" />
+        <div className="absolute inset-0 bg-black/70" />
         <Container className="relative">
           <div className="py-20 text-center sm:py-28">
-            <h2 className="mx-auto max-w-2xl text-[28px] font-semibold tracking-[-0.02em] text-[var(--background)] sm:text-[38px]">
+            <h2 className="mx-auto max-w-2xl text-[28px] font-semibold tracking-[-0.02em] text-white sm:text-[38px]">
               Looking for something we do not list?
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-[16px] leading-relaxed text-[color-mix(in_srgb,var(--background)_78%,transparent)]">
+            <p className="mx-auto mt-5 max-w-lg text-[16px] leading-relaxed text-white/80">
               Tell us the set, the language, or the case you are after. We will tell you what we can
               source, what it costs, and how long it takes.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3 text-[17px]">
               <Link
                 href="/talk-to-a-specialist"
-                className="text-[var(--background)] underline decoration-white/40 underline-offset-4 hover:opacity-80"
+                className="text-white underline decoration-white/40 underline-offset-4 hover:opacity-80"
               >
                 Talk to a specialist
               </Link>
               <a
                 href={site.phoneHref}
-                className="text-[var(--background)] underline decoration-white/40 underline-offset-4 hover:opacity-80"
+                className="text-white underline decoration-white/40 underline-offset-4 hover:opacity-80"
               >
                 {site.phone}
               </a>
@@ -539,7 +741,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 14. Newsletter */}
+      {/* 17. Newsletter */}
       <section className="border-t border-[var(--hairline)] py-16 sm:py-20">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">

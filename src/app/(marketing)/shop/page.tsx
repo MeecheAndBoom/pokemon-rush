@@ -1,10 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { ProductGrid } from "@/components/commerce/ProductGrid";
 import { Pagination } from "@/components/commerce/Pagination";
 import { SearchBox } from "@/components/layout/SearchBox";
 import { brands, filterProducts, languages, productTypes } from "@/lib/catalog";
+import { media } from "@/lib/media";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -70,19 +72,31 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
     );
 
   return (
-    <div className="pt-12 pb-16 sm:pt-16">
+    <div className="pb-16">
+      <section className="relative overflow-hidden border-b border-[var(--hairline)] bg-gradient-to-b from-[var(--tint-blue)] to-[var(--background)]">
+        <Image
+          src={media.art.charizard}
+          alt=""
+          width={320}
+          height={320}
+          aria-hidden
+          className="pointer-events-none absolute -right-10 top-0 hidden opacity-[0.13] lg:block"
+        />
+        <Container className="pt-12 pb-10 sm:pt-16">
+          <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">Shop</h1>
+          <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">
+            {all.length} sealed {all.length === 1 ? "product" : "products"} available. Every item is
+            checked before dispatch.
+          </p>
+
+          <div className="mt-8 max-w-md">
+            <SearchBox defaultValue={sp.q ?? ""} placeholder="Search sets, boxes, accessories" />
+          </div>
+        </Container>
+      </section>
+
       <Container>
-        <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">Shop</h1>
-        <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">
-          {all.length} sealed {all.length === 1 ? "product" : "products"} available. Every item is
-          checked before dispatch.
-        </p>
-
-        <div className="mt-8 max-w-md">
-          <SearchBox defaultValue={sp.q ?? ""} placeholder="Search sets, boxes, accessories" />
-        </div>
-
-        <div className="mt-8 space-y-5">
+        <div className="mt-10 space-y-5">
           <div className="flex flex-wrap items-center gap-2">
             <Link href={buildHref({ brand: undefined })} className={chip(!sp.brand)}>
               All

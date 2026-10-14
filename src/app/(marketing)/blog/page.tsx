@@ -126,7 +126,7 @@ export default function BlogPage() {
         </div>
       </Container>
 
-      <section className="mt-20 border-y border-[var(--hairline)] bg-[var(--surface-2)] py-16 sm:py-20">
+      <section className="mt-20 border-y border-[var(--hairline)] bg-[var(--tint-purple)] py-16 sm:py-20">
         <Container>
           <h2 className="text-[28px] font-semibold tracking-[-0.02em] sm:text-[36px]">
             What we write about

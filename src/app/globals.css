@@ -19,6 +19,15 @@
   --warning: #ff9f0a;
   --danger: #ff3b30;
 
+  /* Section tints */
+  --tint-red: #fff1ec;
+  --tint-yellow: #fff8e3;
+  --tint-blue: #eef5ff;
+  --tint-green: #edfaf0;
+  --tint-purple: #f4f0ff;
+  --tint-pink: #fff0f5;
+  --tint-ink: #5b4a1f;
+
   --radius: 12px;
   color-scheme: light only;
 }

@@ -1,11 +1,13 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { ProductGrid } from "@/components/commerce/ProductGrid";
 import { Pagination } from "@/components/commerce/Pagination";
 import { SearchBox } from "@/components/layout/SearchBox";
 import { brands, getByBrand, languages, productTypes } from "@/lib/catalog";
+import { media } from "@/lib/media";
 import { cn } from "@/lib/utils";
 
 type Params = Promise<{ brand: string }>;
@@ -44,6 +46,21 @@ export default async function BrandPage({
   const sp = await searchParams;
   const meta = brands.find((b) => b.slug === brand);
   if (!meta) notFound();
+
+  const brandArt: Record<string, string | undefined> = {
+    pokemon: media.art.charizard,
+    "one-piece": media.art.greninja,
+    "weiss-schwarz": media.art.lucario,
+    accessories: media.art.snorlax,
+  };
+  const brandTint: Record<string, string> = {
+    pokemon: "from-[var(--tint-yellow)]",
+    "one-piece": "from-[var(--tint-blue)]",
+    "weiss-schwarz": "from-[var(--tint-purple)]",
+    accessories: "from-[var(--tint-green)]",
+  };
+  const heroArt = brandArt[brand];
+  const heroTint = brandTint[brand] ?? "from-[var(--tint-blue)]";
 
   let all = getByBrand(brand);
   if (sp.language) all = all.filter((p) => p.language === sp.language);
@@ -85,28 +102,47 @@ export default async function BrandPage({
     );
 
   return (
-    <div className="pt-12 pb-16 sm:pt-16">
-      <Container>
-        <p className="text-[13px] text-[var(--ink-2)]">
-          <Link href="/shop" className="hover:text-[var(--foreground)]">
-            Shop
-          </Link>
-        </p>
-        <h1 className="mt-4 text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
-          {meta.label}
-        </h1>
-        <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">
-          {meta.blurb}
-        </p>
-
-        <div className="mt-8 max-w-md">
-          <SearchBox
-            defaultValue={sp.q ?? ""}
-            placeholder={`Search ${meta.label}`}
+    <div className="pb-16">
+      <section
+        className={cn(
+          "relative overflow-hidden border-b border-[var(--hairline)] bg-gradient-to-b to-[var(--background)] py-12 sm:py-16",
+          heroTint
+        )}
+      >
+        {heroArt ? (
+          <Image
+            src={heroArt}
+            alt=""
+            width={320}
+            height={320}
+            aria-hidden
+            className="pointer-events-none absolute -right-10 top-2 hidden opacity-[0.13] lg:block"
           />
-        </div>
+        ) : null}
+        <Container>
+          <p className="text-[13px] text-[var(--ink-2)]">
+            <Link href="/shop" className="hover:text-[var(--foreground)]">
+              Shop
+            </Link>
+          </p>
+          <h1 className="mt-4 text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
+            {meta.label}
+          </h1>
+          <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">
+            {meta.blurb}
+          </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-2">
+          <div className="mt-8 max-w-md">
+            <SearchBox
+              defaultValue={sp.q ?? ""}
+              placeholder={`Search ${meta.label}`}
+            />
+          </div>
+        </Container>
+      </section>
+
+      <Container>
+        <div className="mt-10 flex flex-wrap items-center gap-2">
           {languages.map((l) => (
             <Link
               key={l.slug}

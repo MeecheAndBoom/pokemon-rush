@@ -146,7 +146,7 @@ export default function FinanceDisclosurePage() {
         </div>
       </Container>
 
-      <section className="mt-20 border-y border-[var(--hairline)] bg-[var(--surface-2)] py-16">
+      <section className="mt-20 border-y border-[var(--hairline)] bg-[var(--tint-yellow)] py-16">
         <Container>
           <h2 className="text-[26px] font-semibold tracking-[-0.02em] sm:text-[32px]">
             How payment works, step by step

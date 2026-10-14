@@ -54,7 +54,7 @@ export function SearchBox({
       <input
         ref={inputRef}
         id="site-search"
-        type="search"
+        type="text"
         name="q"
         value={value}
         onChange={(event) => setValue(event.target.value)}
