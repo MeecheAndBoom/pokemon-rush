@@ -1,0 +1,98 @@
+[
+  {
+    "name": "brand-pokemon",
+    "width": 1206,
+    "height": 1197,
+    "kb": 95
+  },
+  {
+    "name": "brand-one-piece",
+    "width": 402,
+    "height": 402,
+    "kb": 13
+  },
+  {
+    "name": "brand-weiss-schwarz",
+    "width": 1024,
+    "height": 1024,
+    "kb": 59
+  },
+  {
+    "name": "hero",
+    "width": 1080,
+    "height": 1018,
+    "kb": 105
+  },
+  {
+    "name": "section-pokemon",
+    "width": 1200,
+    "height": 1200,
+    "kb": 8
+  },
+  {
+    "name": "section-one-piece",
+    "width": 430,
+    "height": 447,
+    "kb": 15
+  },
+  {
+    "name": "section-weiss",
+    "width": 768,
+    "height": 707,
+    "kb": 19
+  },
+  {
+    "name": "section-store",
+    "width": 986,
+    "height": 1280,
+    "kb": 41
+  },
+  {
+    "name": "section-shipping",
+    "width": 1120,
+    "height": 1280,
+    "kb": 60
+  },
+  {
+    "name": "section-storage",
+    "width": 576,
+    "height": 411,
+    "kb": 29
+  },
+  {
+    "name": "blog-resealed",
+    "width": 730,
+    "height": 1000,
+    "kb": 129
+  },
+  {
+    "name": "blog-japanese-english",
+    "width": 1206,
+    "height": 1213,
+    "kb": 179
+  },
+  {
+    "name": "blog-etb",
+    "width": 868,
+    "height": 1080,
+    "kb": 60
+  },
+  {
+    "name": "blog-packing",
+    "width": 988,
+    "height": 1280,
+    "kb": 82
+  },
+  {
+    "name": "blog-case",
+    "width": 430,
+    "height": 447,
+    "kb": 15
+  },
+  {
+    "name": "blog-weiss",
+    "width": 1024,
+    "height": 1024,
+    "kb": 69
+  }
+]
