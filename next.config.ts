@@ -4,6 +4,12 @@ import path from "node:path";
 const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname),
+    rules: {
+      "*.css": {
+        loaders: ["@tailwindcss/turbopack"],
+        as: "*.css",
+      },
+    },
   },
   images: {
     remotePatterns: [
