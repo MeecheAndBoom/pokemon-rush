@@ -20,29 +20,7 @@
   --danger: #ff3b30;
 
   --radius: 12px;
-  color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0b0c;
-    --foreground: #f5f5f7;
-    --surface-2: #161617;
-    --ink-2: #a1a1a6;
-    --hairline: rgba(255, 255, 255, 0.12);
-
-    --accent: #ff5b3a;
-    --accent-hover: #ff7358;
-    --accent-strong: #ff8569;
-    --accent-tint: rgba(255, 91, 58, 0.14);
-    --accent-ink: #ff8569;
-
-    --success: #30d158;
-    --warning: #ffd60a;
-    --danger: #ff453a;
-
-    color-scheme: dark;
-  }
+  color-scheme: light only;
 }
 
 html {

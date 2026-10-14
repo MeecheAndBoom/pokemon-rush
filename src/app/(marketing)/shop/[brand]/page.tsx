@@ -3,11 +3,21 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { ProductGrid } from "@/components/commerce/ProductGrid";
+import { Pagination } from "@/components/commerce/Pagination";
+import { SearchBox } from "@/components/layout/SearchBox";
 import { brands, getByBrand, languages, productTypes } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 
 type Params = Promise<{ brand: string }>;
-type SearchParams = Promise<{ language?: string; type?: string; sort?: string }>;
+type SearchParams = Promise<{
+  language?: string;
+  type?: string;
+  sort?: string;
+  q?: string;
+  page?: string;
+}>;
+
+const PAGE_SIZE = 24;
 
 export async function generateStaticParams() {
   return brands.map((b) => ({ brand: b.slug }));
@@ -35,12 +45,36 @@ export default async function BrandPage({
   const meta = brands.find((b) => b.slug === brand);
   if (!meta) notFound();
 
-  let items = getByBrand(brand);
-  if (sp.language) items = items.filter((p) => p.language === sp.language);
-  if (sp.type) items = items.filter((p) => p.productType === sp.type);
+  let all = getByBrand(brand);
+  if (sp.language) all = all.filter((p) => p.language === sp.language);
+  if (sp.type) all = all.filter((p) => p.productType === sp.type);
+  if (sp.q) {
+    const q = sp.q.toLowerCase();
+    all = all.filter(
+      (p) => p.name.toLowerCase().includes(q) || p.tags.join(" ").toLowerCase().includes(q)
+    );
+  }
 
-  if (sp.sort === "price-asc") items = [...items].sort((a, b) => a.price - b.price);
-  if (sp.sort === "price-desc") items = [...items].sort((a, b) => b.price - a.price);
+  if (sp.sort === "price-asc") all = [...all].sort((a, b) => a.price - b.price);
+  if (sp.sort === "price-desc") all = [...all].sort((a, b) => b.price - a.price);
+  if (sp.sort === "name-asc") all = [...all].sort((a, b) => a.name.localeCompare(b.name));
+
+  const parsedPage = Number.parseInt(sp.page ?? "1", 10);
+  const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+  const current = Math.min(Math.max(Number.isNaN(parsedPage) ? 1 : parsedPage, 1), totalPages);
+  const start = (current - 1) * PAGE_SIZE;
+  const items = all.slice(start, start + PAGE_SIZE);
+
+  const base: Record<string, string | undefined> = { ...sp, page: undefined };
+  const href = (patch: Record<string, string | undefined>) => {
+    const merged = { ...base, ...patch };
+    const p = new URLSearchParams();
+    Object.entries(merged).forEach(([k, v]) => {
+      if (v) p.set(k, v as string);
+    });
+    const qs = p.toString();
+    return qs ? `/shop/${brand}?${qs}` : `/shop/${brand}`;
+  };
 
   const chip = (active: boolean) =>
     cn(
@@ -50,18 +84,8 @@ export default async function BrandPage({
         : "border-[var(--hairline)] text-[var(--ink-2)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
     );
 
-  const href = (patch: Record<string, string | undefined>) => {
-    const merged = { ...sp, ...patch };
-    const p = new URLSearchParams();
-    Object.entries(merged).forEach(([k, v]) => {
-      if (v) p.set(k, v as string);
-    });
-    const qs = p.toString();
-    return qs ? `/shop/${brand}?${qs}` : `/shop/${brand}`;
-  };
-
   return (
-    <div className="pt-14 pb-10 sm:pt-20">
+    <div className="pt-12 pb-16 sm:pt-16">
       <Container>
         <p className="text-[13px] text-[var(--ink-2)]">
           <Link href="/shop" className="hover:text-[var(--foreground)]">
@@ -75,7 +99,14 @@ export default async function BrandPage({
           {meta.blurb}
         </p>
 
-        <div className="mt-10 flex flex-wrap items-center gap-2">
+        <div className="mt-8 max-w-md">
+          <SearchBox
+            defaultValue={sp.q ?? ""}
+            placeholder={`Search ${meta.label}`}
+          />
+        </div>
+
+        <div className="mt-8 flex flex-wrap items-center gap-2">
           {languages.map((l) => (
             <Link
               key={l.slug}
@@ -102,9 +133,28 @@ export default async function BrandPage({
           </Link>
         </div>
 
-        <div className="mt-14">
+        <div className="mt-10 flex items-baseline justify-between gap-4 border-b border-[var(--hairline)] pb-4">
+          <p className="text-[13px] text-[var(--ink-2)]">
+            Showing {all.length === 0 ? 0 : start + 1}–{Math.min(start + PAGE_SIZE, all.length)} of{" "}
+            {all.length}
+          </p>
+          {totalPages > 1 ? (
+            <p className="text-[13px] text-[var(--ink-2)]">
+              Page {current} of {totalPages}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="mt-10">
           <ProductGrid products={items} />
         </div>
+
+        <Pagination
+          current={current}
+          total={totalPages}
+          hrefForPage={(page) => href({ page: page === 1 ? undefined : String(page) })}
+          className="mt-16"
+        />
       </Container>
     </div>
   );

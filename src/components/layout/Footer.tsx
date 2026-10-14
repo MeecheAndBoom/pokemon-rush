@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { footerNav, site } from "@/lib/site";
@@ -13,19 +14,27 @@ export function Footer() {
             <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-[var(--ink-2)]">
               {site.description}
             </p>
-            <div className="mt-6 space-y-1 text-[13px] text-[var(--ink-2)]">
-              <p>
+            <div className="mt-6 space-y-2.5 text-[13px] text-[var(--ink-2)]">
+              <p className="flex items-center gap-2.5">
+                <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 <a href={site.phoneHref} className="hover:text-[var(--foreground)]">
                   {site.phone}
                 </a>
               </p>
-              <p>
+              <p className="flex items-center gap-2.5">
+                <Mail className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 <a
                   href={`mailto:${site.email}`}
                   className="hover:text-[var(--foreground)]"
                 >
                   {site.email}
                 </a>
+              </p>
+              <p className="flex items-start gap-2.5">
+                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
+                <span>
+                  {site.address.line1}, {site.address.city}
+                </span>
               </p>
             </div>
 
