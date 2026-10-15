@@ -12,7 +12,7 @@ export type LegalDoc = {
   sections: { heading: string; body: string }[];
 };
 
-const CONTACT = `If you have questions about this document, email support@pokestoredirect.com or call (213) 300-5923.`;
+const CONTACT = `If you have questions about this document, email sales@pokestoredirect.com or call (213) 300-5923.`;
 
 export const legalDocs: Record<string, LegalDoc> = {
   terms: {
@@ -210,7 +210,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       },
       {
         heading: "5. Giving feedback",
-        body: `If you have trouble using any part of the site, or you would like information in a different format, email support@pokestoredirect.com or call (213) 300-5923. Please describe what you were trying to do and what happened, and we will respond promptly.`,
+        body: `If you have trouble using any part of the site, or you would like information in a different format, email sales@pokestoredirect.com or call (213) 300-5923. Please describe what you were trying to do and what happened, and we will respond promptly.`,
       },
     ],
   },

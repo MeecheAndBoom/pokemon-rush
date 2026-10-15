@@ -14,9 +14,9 @@ export const site = {
   tagline: "Authentic trading cards, sealed and ready to ship.",
   description:
     "PokéStore Direct supplies factory-sealed Pokémon, One Piece, and Weiss Schwarz trading cards, sourced through official distribution channels and shipped worldwide.",
-  url: "https://pokemon-rush-sigma.vercel.app",
+  url: "https://www.pokestoredirect.com",
   phone: "(213) 300-5923",
-  email: "support@pokestoredirect.com",
+  email: "sales@pokestoredirect.com",
   hours: "Monday to Friday, 9am – 6pm (PT)",
   address: {
     line1: "",

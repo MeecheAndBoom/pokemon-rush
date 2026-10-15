@@ -68,7 +68,7 @@ seed: "pokemon rush" ->
 - **Suggestions are language/locale polluted.** French-language results appear for several seeds (`elite trainer box 30 ans`, `pokemon etb nuit noire`, `pokestore france`). Treat those as noise for a US/English store.
 - **SERP snapshots are single-day and single-locale.** DuckDuckGo results are one point in time; rankings shift. Use the competitor map as "who is in the arena", not as a live rank tracker.
 - **No third-party keyword tool was used** (no Ahrefs, Semrush, Keyword Planner). Where a competition level is stated it is a qualitative guess based on the observed result set plus domain authority, not a measurable difficulty score.
-- **`pokemon-rush` is a brand liability.** The domain namespaced "pokemon rush" and that phrase is already owned by Pokémon Rumble Rush and unrelated terms. The brand is "PokéStore Direct" and the email is `support@pokestoredirect.com`; the domain does not match. That mismatch is the single biggest brand-search problem (see section 5).
+- **`pokemon-rush` is a brand liability.** The domain namespaced "pokemon rush" and that phrase is already owned by Pokémon Rumble Rush and unrelated terms. The brand is "PokéStore Direct" and the email is `sales@pokestoredirect.com`; the domain does not match. That mismatch is the single biggest brand-search problem (see section 5).
 
 ---
 
@@ -205,7 +205,7 @@ Risks found in the live data:
 Recommendation to start owning the brand:
 
 1. **Pick one canonical name and repeat it verbatim** in the logo, footer, email, socials, and every title tag: `PokéStore Direct` (with the "Direct"). Always use the full two-word form, never bare "PokéStore".
-2. **Get a matching domain** such as `pokestoredirect.com` (the site already uses `support@pokestoredirect.com`, so this is consistent) and 301 the Vercel URL to it. Brand queries convert to a domain; an unrelated domain cannot.
+2. **Get a matching domain** such as `pokestoredirect.com` (the site already uses `sales@pokestoredirect.com`, so this is consistent) and 301 the Vercel URL to it. Brand queries convert to a domain; an unrelated domain cannot.
 3. **Create a branded entity footprint**: Google Business Profile (Los Angeles), Instagram/X/TikTok with the exact name, a consistent NAP block on `/about` and `/contact`, and `Organization` + `WebSite` structured data with the same brand.
 4. **Seed the two-word phrase in content** so it earns a suggestion: use "PokéStore Direct" in blog bylines, FAQ answers, press mentions, and review requests. Branded autocomplete normally appears once enough people search it.
 5. **Own the disambiguated phrase**: target "PokéStore Direct" with the store qualifier in the homepage and about titles (for example, "PokéStore Direct — Factory-Sealed Trading Cards"), so a user search for the brand resolves to the store rather than to French `pokestore` retailers.
