@@ -1,21 +1,33 @@
+export type Address = {
+  line1: string;
+  line2: string;
+  city: string;
+  country: string;
+};
+
+// Static defaults. The live values can be overridden from Admin -> Settings
+// (see src/lib/settings.ts). Anything displayed on the storefront should be read
+// through getSiteSettings() rather than imported from here directly.
 export const site = {
-  name: "Pokemon Rush",
-  shortName: "Pokemon Rush",
+  name: "PokéStore Direct",
+  shortName: "PokéStore Direct",
   tagline: "Authentic trading cards, sealed and ready to ship.",
   description:
-    "Pokemon Rush supplies factory-sealed Pokémon, One Piece, and Weiss Schwarz trading cards, sourced through official distribution channels and shipped worldwide.",
-  url: "http://localhost:3000",
-  phone: "(313) 364-9615",
-  phoneHref: "tel:+13133649615",
-  email: "support@pokemonrush.com",
-  salesEmail: "sales@pokemonrush.com",
-  hours: "Monday to Friday, 9am – 6pm (EST)",
+    "PokéStore Direct supplies factory-sealed Pokémon, One Piece, and Weiss Schwarz trading cards, sourced through official distribution channels and shipped worldwide.",
+  url: "https://pokemon-rush-sigma.vercel.app",
+  phone: "(213) 300-5923",
+  email: "support@pokestoredirect.com",
+  salesEmail: "sales@pokestoredirect.com",
+  hours: "Monday to Friday, 9am – 6pm (PT)",
   address: {
-    line1: "Sunshine City Alpa 2F",
-    line2: "3 Chome-1-2 Higashiikebukuro",
-    city: "Toshima City, Tokyo 170-6002",
-    country: "Japan",
-  },
+    line1: "",
+    line2: "",
+    city: "Los Angeles, CA",
+    country: "United States",
+  } as Address,
+  whatsapp: "12133005923",
+  whatsappMessage:
+    "Hi PokéStore Direct — I'd like some help with a sealed card order.",
   social: {
     instagram: "https://instagram.com",
     x: "https://x.com",
@@ -85,3 +97,11 @@ export const footerNav = [
     ],
   },
 ];
+
+/** Joins the non-empty parts of an address into a single display string. */
+export function formatAddress(address: Address) {
+  return [address.line1, address.line2, address.city, address.country]
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(", ");
+}

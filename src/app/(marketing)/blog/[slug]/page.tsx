@@ -67,6 +67,7 @@ export default async function PostPage({ params }: { params: Params }) {
             year: "numeric",
             month: "long",
             day: "numeric",
+            timeZone: "UTC",
           })}{" "}
           · {post.readingMinutes} min read
         </p>

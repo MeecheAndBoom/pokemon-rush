@@ -6,7 +6,7 @@ import { footerNav } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Sitemap",
-  description: "Every page on the Pokemon Rush website in one place.",
+  description: "Every page on the PokéStore Direct website in one place.",
 };
 
 export default function SitemapPage() {
@@ -31,7 +31,7 @@ export default function SitemapPage() {
       <Container>
         <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">Sitemap</h1>
         <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">
-          Every page on Pokemon Rush, grouped so you can find what you need quickly.
+          Every page on PokéStore Direct, grouped so you can find what you need quickly.
         </p>
 
         <div className="mt-14 grid gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">

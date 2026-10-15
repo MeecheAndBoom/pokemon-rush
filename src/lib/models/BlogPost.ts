@@ -8,7 +8,7 @@ const BlogPostSchema = new Schema(
     content: { type: String, default: "" },
     coverImage: { type: String, default: "" },
     coverAlt: { type: String, default: "" },
-    author: { type: String, default: "Pokemon Rush" },
+    author: { type: String, default: "PokéStore Direct" },
     category: { type: String, default: "Guides" },
     tags: { type: [String], default: [] },
     readingMinutes: { type: Number, default: 5 },

@@ -7,7 +7,7 @@ import { reviewSummary, reviews } from "@/data/reviews";
 export const metadata: Metadata = {
   title: "Reviews",
   description:
-    "Read what collectors say about buying sealed Pokémon, One Piece, and Weiss Schwarz products from Pokemon Rush.",
+    "Read what collectors say about buying sealed Pokémon, One Piece, and Weiss Schwarz products from PokéStore Direct.",
 };
 
 export default function ReviewsPage() {

@@ -29,7 +29,7 @@ import { media, guideCover, heroSlides } from "@/lib/media";
 import { reviewSummary, reviews } from "@/data/reviews";
 import { posts } from "@/data/posts";
 import { supportFaqs } from "@/data/faq";
-import { site } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
 
 const valueProps = [
   {
@@ -92,7 +92,8 @@ const trustedResources = [
   { label: "CGC Cards", href: "https://www.cgccards.com/" },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const settings = await getSiteSettings();
   const featured = getFeatured(8);
   const brandCounts = getBrandCounts();
   const activeBrands = brandCounts.filter((brand) => brand.count > 0);
@@ -210,7 +211,7 @@ export default function HomePage() {
             imageAlt="Sealed Pokémon product"
             title="Your destination for Japanese Pokémon booster boxes"
             body={[
-              "At Pokemon Rush we live and breathe this hobby. Our aim is simple: to get authentic Japanese Pokémon booster boxes into the hands of collectors and players wherever they are. Whether you are hunting an ultra-rare card, chasing a new release, or just love the feeling of cracking a sealed box, we have built the shop around that.",
+              "At PokéStore Direct we live and breathe this hobby. Our aim is simple: to get authentic Japanese Pokémon booster boxes into the hands of collectors and players wherever they are. Whether you are hunting an ultra-rare card, chasing a new release, or just love the feeling of cracking a sealed box, we have built the shop around that.",
               "What makes us different is that we collect too. We understand the hunt, and we know what a factory seal should look like. Every box we sell is sealed, inspected, and sourced directly — no middlemen, no resealing, no surprises.",
             ]}
             points={[
@@ -672,10 +673,10 @@ export default function HomePage() {
                 Talk to a specialist
               </Link>
               <a
-                href={site.phoneHref}
+                href={settings.phoneHref}
                 className="text-white underline decoration-white/40 underline-offset-4 hover:opacity-80"
               >
-                {site.phone}
+                {settings.phone}
               </a>
             </div>
           </div>

@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CreditCard, Globe, Landmark, ShieldCheck, Wallet } from "lucide-react";
 import { Container } from "@/components/layout/Container";
+import { getSiteSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Finance disclosure",
   description:
-    "How payment works at Pokemon Rush, and what we do and do not offer in terms of credit and finance.",
+    "How payment works at PokéStore Direct, and what we do and do not offer in terms of credit and finance.",
 };
 
 const atAGlance = [
@@ -50,7 +51,9 @@ const flow = [
   },
 ];
 
-export default function FinanceDisclosurePage() {
+export default async function FinanceDisclosurePage() {
+  const settings = await getSiteSettings();
+
   return (
     <div className="pt-14 pb-16 sm:pt-20">
       <Container size="narrow">
@@ -58,7 +61,7 @@ export default function FinanceDisclosurePage() {
           Finance disclosure
         </h1>
         <p className="mt-5 text-[16px] leading-relaxed text-[var(--ink-2)]">
-          This page explains how payment works at Pokemon Rush and the limits of what we offer. It
+          This page explains how payment works at PokéStore Direct and the limits of what we offer. It
           should be read together with our{" "}
           <Link href="/legal/terms" className="text-[var(--accent)] hover:opacity-70">
             Terms &amp; conditions
@@ -85,7 +88,7 @@ export default function FinanceDisclosurePage() {
           <section>
             <h2 className="text-[20px] font-semibold tracking-tight">We do not offer credit</h2>
             <p className="mt-3 text-[16px] leading-relaxed text-[var(--ink-2)]">
-              Pokemon Rush does not offer credit, loans, instalment plans, buy-now-pay-later
+              PokéStore Direct does not offer credit, loans, instalment plans, buy-now-pay-later
               products, or any form of financing. We do not charge interest of any kind. We are a
               retailer, not a lender, and we are not authorised to provide credit.
             </p>
@@ -171,10 +174,13 @@ export default function FinanceDisclosurePage() {
             <h2 className="text-[18px] font-semibold tracking-tight">Questions about payment</h2>
             <p className="mt-2 text-[16px] leading-relaxed text-[var(--ink-2)]">
               Email{" "}
-              <a href="mailto:support@pokemonrush.com" className="text-[var(--accent)] hover:opacity-70">
-                support@pokemonrush.com
+              <a
+                href={`mailto:${settings.email}`}
+                className="text-[var(--accent)] hover:opacity-70"
+              >
+                {settings.email}
               </a>{" "}
-              or call (313) 364-9615. The same details are in our{" "}
+              or call {settings.phone}. The same details are in our{" "}
               <Link href="/legal/terms" className="text-[var(--accent)] hover:opacity-70">
                 Terms &amp; conditions
               </Link>

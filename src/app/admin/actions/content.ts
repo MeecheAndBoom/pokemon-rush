@@ -3,13 +3,15 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { connectDB } from "@/lib/db";
+import { digits } from "@/lib/settings";
 import { Review } from "@/lib/models/Review";
 import { Coupon } from "@/lib/models/Coupon";
 import { PaymentMethod } from "@/lib/models/PaymentMethod";
 import { BlogPost } from "@/lib/models/BlogPost";
 import { Submission } from "@/lib/models/Submission";
 import { AdminUser } from "@/lib/models/AdminUser";
-import { hashPassword, verifyPassword } from "@/lib/auth";
+import { SiteSetting } from "@/lib/models/SiteSetting";
+import { createSession, hashPassword, verifyPassword } from "@/lib/auth";
 import { requireSession } from "@/app/admin/actions/auth";
 
 const str = (fd: FormData, key: string) => String(fd.get(key) || "").trim();
@@ -129,7 +131,7 @@ export async function savePostAction(fd: FormData) {
     content: str(fd, "content"),
     coverImage: str(fd, "coverImage"),
     category: str(fd, "category") || "Guides",
-    author: str(fd, "author") || "Pokemon Rush",
+    author: str(fd, "author") || "PokéStore Direct",
     readingMinutes: num(fd, "readingMinutes") || 5,
     status: str(fd, "status") || "draft",
     publishedAt: str(fd, "status") === "published" ? new Date() : undefined,
@@ -170,6 +172,65 @@ export async function deleteSubmissionAction(fd: FormData) {
 }
 
 /* Settings */
+
+export async function saveSiteSettingsAction(fd: FormData) {
+  await requireSession();
+  await connectDB();
+
+  const whatsapp = digits(str(fd, "whatsapp"));
+
+  await SiteSetting.updateOne(
+    { key: "site" },
+    {
+      $set: {
+        phone: str(fd, "phone"),
+        whatsapp,
+        whatsappMessage: str(fd, "whatsappMessage"),
+        address: {
+          line1: str(fd, "addressLine1"),
+          line2: str(fd, "addressLine2"),
+          city: str(fd, "addressCity"),
+          country: str(fd, "addressCountry"),
+        },
+      },
+    },
+    { upsert: true }
+  );
+
+  revalidatePath("/", "layout");
+  redirect("/admin/settings?saved=1");
+}
+
+export async function changeAdminEmailAction(fd: FormData) {
+  const session = await requireSession();
+  await connectDB();
+
+  const email = str(fd, "email").toLowerCase();
+  const password = str(fd, "password");
+
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    redirect("/admin/settings?error=email");
+  }
+
+  const user = await AdminUser.findById(session.sub).lean();
+  if (!user || !(await verifyPassword(password, user.passwordHash))) {
+    redirect("/admin/settings?error=current");
+  }
+
+  if (email !== user.email) {
+    const taken = await AdminUser.findOne({ email }).lean();
+    if (taken) redirect("/admin/settings?error=taken");
+  }
+
+  await AdminUser.updateOne({ _id: session.sub }, { $set: { email } });
+  await SiteSetting.updateOne({ key: "site" }, { $set: { adminEmail: email } }, { upsert: true });
+
+  // Refresh the signed cookie so the session carries the new address.
+  await createSession({ ...session, email });
+
+  revalidatePath("/", "layout");
+  redirect("/admin/settings?saved=email");
+}
 
 export async function changePasswordAction(fd: FormData) {
   const session = await requireSession();

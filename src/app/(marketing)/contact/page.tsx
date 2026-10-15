@@ -2,44 +2,46 @@ import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { site } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact Pokemon Rush about an order, a release, or wholesale.",
+  description: "Contact PokéStore Direct about an order, a release, or wholesale.",
 };
 
-const channels = [
-  {
-    icon: Phone,
-    label: "Phone",
-    value: site.phone,
-    href: site.phoneHref,
-    note: site.hours,
-  },
-  {
-    icon: Mail,
-    label: "Support",
-    value: site.email,
-    href: `mailto:${site.email}`,
-    note: "Order questions, returns, and delivery.",
-  },
-  {
-    icon: Mail,
-    label: "Sales & wholesale",
-    value: site.salesEmail,
-    href: `mailto:${site.salesEmail}`,
-    note: "Sourcing requests, bulk pricing, and partnerships.",
-  },
-  {
-    icon: MapPin,
-    label: "Address",
-    value: `${site.address.line1}, ${site.address.city}`,
-    note: site.address.country,
-  },
-];
+export default async function ContactPage() {
+  const settings = await getSiteSettings();
 
-export default function ContactPage() {
+  const channels = [
+    {
+      icon: Phone,
+      label: "Phone",
+      value: settings.phone,
+      href: settings.phoneHref,
+      note: settings.hours,
+    },
+    {
+      icon: Mail,
+      label: "Support",
+      value: settings.email,
+      href: `mailto:${settings.email}`,
+      note: "Order questions, returns, and delivery.",
+    },
+    {
+      icon: Mail,
+      label: "Sales & wholesale",
+      value: settings.salesEmail,
+      href: `mailto:${settings.salesEmail}`,
+      note: "Sourcing requests, bulk pricing, and partnerships.",
+    },
+    {
+      icon: MapPin,
+      label: "Address",
+      value: settings.addressLine,
+      note: settings.address.country,
+    },
+  ];
+
   return (
     <div className="pt-14 pb-16 sm:pt-20">
       <Container>

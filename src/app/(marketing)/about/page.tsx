@@ -2,12 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { BadgeCheck, MapPin, PackageCheck, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-import { site } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "About us",
   description:
-    "Pokemon Rush sources factory-sealed Pokémon, One Piece, and Weiss Schwarz trading cards through official distribution and ships worldwide.",
+    "PokéStore Direct sources factory-sealed Pokémon, One Piece, and Weiss Schwarz trading cards through official distribution and ships worldwide.",
 };
 
 const standards = [
@@ -28,14 +28,16 @@ const standards = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const settings = await getSiteSettings();
+
   return (
     <div className="pt-14 pb-16 sm:pt-20">
       <Container>
         <div className="max-w-3xl">
           <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">About us</h1>
           <p className="mt-6 text-[17px] leading-relaxed text-[var(--ink-2)]">
-            Pokemon Rush is a collector-focused store supplying authentic, factory-sealed Pokémon TCG,
+            PokéStore Direct is a collector-focused store supplying authentic, factory-sealed Pokémon TCG,
             One Piece Card Game, and Weiss Schwarz trading cards. We source through official
             distribution, inspect every item before dispatch, and keep the process simple and honest.
           </p>
@@ -76,13 +78,21 @@ export default function AboutPage() {
             <p className="mt-4 flex items-start gap-2.5 text-[15px] leading-relaxed text-[var(--ink-2)]">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden="true" />
               <span>
-                {site.address.line1}
+                {settings.address.line1 ? (
+                  <>
+                    {settings.address.line1}
+                    <br />
+                  </>
+                ) : null}
+                {settings.address.line2 ? (
+                  <>
+                    {settings.address.line2}
+                    <br />
+                  </>
+                ) : null}
+                {settings.address.city}
                 <br />
-                {site.address.line2}
-                <br />
-                {site.address.city}
-                <br />
-                {site.address.country}
+                {settings.address.country}
               </span>
             </p>
             <p className="mt-5 text-[15px] leading-relaxed text-[var(--ink-2)]">
@@ -93,7 +103,7 @@ export default function AboutPage() {
           <div>
             <h2 className="text-[20px] font-semibold tracking-tight">Independent and transparent</h2>
             <p className="mt-4 text-[15px] leading-relaxed text-[var(--ink-2)]">
-              Pokemon Rush is an independent reseller. We are not affiliated with, endorsed by, or
+              PokéStore Direct is an independent reseller. We are not affiliated with, endorsed by, or
               sponsored by Nintendo, Creatures, GAME FREAK, The Pokémon Company, Bandai, or
               Bushiroad. All trademarks and product names belong to their respective owners and are
               used only to describe the products we sell.
@@ -108,8 +118,8 @@ export default function AboutPage() {
           <Link href="/talk-to-a-specialist" className="text-[var(--accent)] hover:opacity-70">
             Talk to a specialist
           </Link>
-          <a href={site.phoneHref} className="text-[var(--accent)] hover:opacity-70">
-            {site.phone}
+          <a href={settings.phoneHref} className="text-[var(--accent)] hover:opacity-70">
+            {settings.phone}
           </a>
         </div>
       </Container>

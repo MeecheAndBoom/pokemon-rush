@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CheckCircle2, FileText, PackageCheck, RotateCcw, XCircle } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-import { site } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Returns & refunds",
@@ -23,7 +23,9 @@ const notEligible = [
   "Pre-order items once they have been dispatched.",
 ];
 
-export default function ReturnsPage() {
+export default async function ReturnsPage() {
+  const settings = await getSiteSettings();
+
   return (
     <div className="pt-14 pb-16 sm:pt-20">
       <Container>
@@ -83,7 +85,7 @@ export default function ReturnsPage() {
               {
                 step: "01",
                 title: "Contact us first",
-                body: `Email ${site.email} with your order number, a description of the issue, and photos of the item and packaging.`,
+                body: `Email ${settings.email} with your order number, a description of the issue, and photos of the item and packaging.`,
               },
               {
                 step: "02",

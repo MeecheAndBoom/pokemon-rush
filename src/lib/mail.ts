@@ -52,12 +52,12 @@ export async function sendMail({ to, subject, html, text, replyTo }: MailInput) 
 export function shell(title: string, body: string) {
   return `<!doctype html><html><body style="margin:0;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1d1d1f;">
   <div style="max-width:560px;margin:0 auto;padding:40px 24px;">
-    <p style="font-size:16px;font-weight:600;margin:0 0 24px;">Pokemon Rush</p>
+    <p style="font-size:16px;font-weight:600;margin:0 0 24px;">PokéStore Direct</p>
     <div style="background:#ffffff;border-radius:16px;padding:32px;">
       <h1 style="font-size:22px;margin:0 0 16px;letter-spacing:-0.01em;">${title}</h1>
       ${body}
     </div>
-    <p style="font-size:12px;color:#6e6e73;margin:24px 0 0;">You received this email because you placed an order or contacted Pokemon Rush.</p>
+    <p style="font-size:12px;color:#6e6e73;margin:24px 0 0;">You received this email because you placed an order or contacted PokéStore Direct.</p>
   </div>
 </body></html>`;
 }

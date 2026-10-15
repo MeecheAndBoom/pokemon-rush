@@ -110,7 +110,7 @@ export default async function AdminSubmissionsPage() {
                 </form>
                 <a
                   href={`mailto:${row.email}?subject=${encodeURIComponent(
-                    `Re: ${row.subject || "Your message to Pokemon Rush"}`
+                    `Re: ${row.subject || "Your message to PokéStore Direct"}`
                   )}`}
                   className="text-[13px] text-[var(--accent)] hover:opacity-70"
                 >

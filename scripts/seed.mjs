@@ -265,10 +265,35 @@ async function main() {
     const passwordHash = await bcrypt.hash(password, 10);
     await AdminUser.updateOne(
       { email },
-      { $set: { email, passwordHash, name: "Pokemon Rush Admin", role: "admin" } },
+      { $set: { email, passwordHash, name: "PokéStore Direct Admin", role: "admin" } },
       { upsert: true }
     );
     console.log(`Admin user ready: ${email}`);
+  }
+
+  // Storefront settings. Never clobbers values the admin has already saved.
+  const settings = mongoose.connection.db.collection("sitesettings");
+  const existing = await settings.findOne({ key: "site" });
+  if (!existing) {
+    await settings.insertOne({
+      key: "site",
+      adminEmail: email,
+      phone: "",
+      whatsapp: "",
+      whatsappMessage: "",
+      address: { line1: "", line2: "", city: "", country: "" },
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+    console.log(`Storefront settings created (notifications -> ${email}).`);
+  } else if (!existing.adminEmail) {
+    await settings.updateOne(
+      { key: "site" },
+      { $set: { adminEmail: email, updatedAt: new Date() } }
+    );
+    console.log(`Storefront settings notifications -> ${email}.`);
+  } else {
+    console.log("Storefront settings already saved - leaving them untouched.");
   }
 
   // Payment methods

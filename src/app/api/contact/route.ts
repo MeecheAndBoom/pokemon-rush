@@ -5,6 +5,7 @@ import { z } from "zod";
 import { sendMail, contactAutoReply, contactNotification } from "@/lib/emails";
 import { connectDB } from "@/lib/db";
 import { Submission } from "@/lib/models/Submission";
+import { getNotificationEmail } from "@/lib/settings";
 
 const schema = z.object({
   type: z.enum(["contact", "support", "specialist", "wholesale"]),
@@ -30,12 +31,12 @@ export async function POST(req: Request) {
 
     await sendMail({
       to: data.email,
-      subject: "Pokemon Rush – We received your message",
+      subject: "PokéStore Direct – We received your message",
       html: contactAutoReply(data.name),
     });
 
     await sendMail({
-      to: "meecheandboom@gmail.com",
+      to: await getNotificationEmail(),
       subject: `New ${data.type} message`,
       html: contactNotification(data),
     });

@@ -22,7 +22,7 @@ export default async function AdminLoginPage({
   return (
     <div className="flex min-h-dvh items-center justify-center px-5 py-16">
       <div className="w-full max-w-sm">
-        <h1 className="text-[26px] font-semibold tracking-[-0.02em]">Pokemon Rush admin</h1>
+        <h1 className="text-[26px] font-semibold tracking-[-0.02em]">PokéStore Direct admin</h1>
         <p className="mt-2 text-[14px] text-[var(--ink-2)]">
           Sign in to manage products, orders, and content.
         </p>

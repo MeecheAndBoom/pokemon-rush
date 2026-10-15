@@ -12,21 +12,21 @@ export type LegalDoc = {
   sections: { heading: string; body: string }[];
 };
 
-const CONTACT = `If you have questions about this document, email support@pokemonrush.com or call (313) 364-9615.`;
+const CONTACT = `If you have questions about this document, email support@pokestoredirect.com or call (213) 300-5923.`;
 
 export const legalDocs: Record<string, LegalDoc> = {
   terms: {
     slug: "terms",
     title: "Terms & conditions",
     description:
-      "The terms that govern your use of the Pokemon Rush website and any order you place with us.",
+      "The terms that govern your use of the PokéStore Direct website and any order you place with us.",
     lastUpdated: "2026-09-01",
     intro:
-      'These terms and conditions ("Terms") govern your access to and use of pokemonrush.com and any purchase you make from Pokemon Rush ("we", "us", "our"). By using the site or placing an order you agree to these Terms. If you do not agree, please do not use the site.',
+      'These terms and conditions ("Terms") govern your access to and use of pokestoredirect.com and any purchase you make from PokéStore Direct ("we", "us", "our"). By using the site or placing an order you agree to these Terms. If you do not agree, please do not use the site.',
     sections: [
       {
         heading: "1. Who we are",
-        body: `Pokemon Rush is an independent online retailer of trading card products, including factory-sealed Pokémon, One Piece, and Weiss Schwarz items. We are not affiliated with, endorsed by, or sponsored by Nintendo, Creatures, GAME FREAK, The Pokémon Company, Bandai, or Bushiroad. All trademarks are the property of their respective owners.`,
+        body: `PokéStore Direct is an independent online retailer of trading card products, including factory-sealed Pokémon, One Piece, and Weiss Schwarz items. We are not affiliated with, endorsed by, or sponsored by Nintendo, Creatures, GAME FREAK, The Pokémon Company, Bandai, or Bushiroad. All trademarks are the property of their respective owners.`,
       },
       {
         heading: "2. Products and descriptions",
@@ -62,7 +62,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       },
       {
         heading: "10. Intellectual property",
-        body: `The design, text, and organisation of this site are owned by or licensed to Pokemon Rush. Product names, logos, and artwork belong to their respective rights holders and are used for identification purposes. You may not reproduce our site content without permission.`,
+        body: `The design, text, and organisation of this site are owned by or licensed to PokéStore Direct. Product names, logos, and artwork belong to their respective rights holders and are used for identification purposes. You may not reproduce our site content without permission.`,
       },
       {
         heading: "11. Limitation of liability",
@@ -87,10 +87,10 @@ export const legalDocs: Record<string, LegalDoc> = {
     slug: "privacy",
     title: "Privacy policy",
     description:
-      "What personal information Pokemon Rush collects, how we use it, and the choices you have.",
+      "What personal information PokéStore Direct collects, how we use it, and the choices you have.",
     lastUpdated: "2026-09-01",
     intro:
-      "This privacy policy explains what personal information we collect when you use pokemonrush.com, why we collect it, how we use and protect it, and the rights you have over it.",
+      "This privacy policy explains what personal information we collect when you use pokestoredirect.com, why we collect it, how we use and protect it, and the rights you have over it.",
     sections: [
       {
         heading: "1. Information we collect",
@@ -147,10 +147,10 @@ export const legalDocs: Record<string, LegalDoc> = {
     slug: "cookies",
     title: "Cookies policy",
     description:
-      "How Pokemon Rush uses cookies and similar technologies, and how you can control them.",
+      "How PokéStore Direct uses cookies and similar technologies, and how you can control them.",
     lastUpdated: "2026-09-01",
     intro:
-      "This Cookies policy explains what cookies are, how we use them, and how you can control them when you visit pokemonrush.com.",
+      "This Cookies policy explains what cookies are, how we use them, and how you can control them when you visit pokestoredirect.com.",
     sections: [
       {
         heading: "1. What cookies are",
@@ -187,10 +187,10 @@ export const legalDocs: Record<string, LegalDoc> = {
     slug: "accessibility",
     title: "Accessibility statement",
     description:
-      "Our commitment to making pokemonrush.com usable by everyone, and how to tell us about a barrier.",
+      "Our commitment to making pokestoredirect.com usable by everyone, and how to tell us about a barrier.",
     lastUpdated: "2026-09-01",
     intro:
-      "We want everyone to be able to shop with Pokemon Rush. This statement explains the standards we aim for, what we have done so far, and how to tell us if something is not working for you.",
+      "We want everyone to be able to shop with PokéStore Direct. This statement explains the standards we aim for, what we have done so far, and how to tell us if something is not working for you.",
     sections: [
       {
         heading: "1. Our commitment",
@@ -210,7 +210,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       },
       {
         heading: "5. Giving feedback",
-        body: `If you have trouble using any part of the site, or you would like information in a different format, email support@pokemonrush.com or call (313) 364-9615. Please describe what you were trying to do and what happened, and we will respond promptly.`,
+        body: `If you have trouble using any part of the site, or you would like information in a different format, email support@pokestoredirect.com or call (213) 300-5923. Please describe what you were trying to do and what happened, and we will respond promptly.`,
       },
     ],
   },
@@ -219,14 +219,14 @@ export const legalDocs: Record<string, LegalDoc> = {
     slug: "disclaimer",
     title: "Disclaimer",
     description:
-      "Important information about Pokemon Rush, product values, and the information on this site.",
+      "Important information about PokéStore Direct, product values, and the information on this site.",
     lastUpdated: "2026-09-01",
     intro:
-      "This disclaimer applies to the information published on pokemonrush.com. Please read it together with our Terms & conditions.",
+      "This disclaimer applies to the information published on pokestoredirect.com. Please read it together with our Terms & conditions.",
     sections: [
       {
         heading: "1. No affiliation",
-        body: `Pokemon Rush is an independent reseller. We are not affiliated with, endorsed by, or sponsored by Nintendo, Creatures, GAME FREAK, The Pokémon Company, Bandai, Bushiroad, or any other rights holder. All product names, logos, and artwork are the property of their respective owners and are used for identification purposes only.`,
+        body: `PokéStore Direct is an independent reseller. We are not affiliated with, endorsed by, or sponsored by Nintendo, Creatures, GAME FREAK, The Pokémon Company, Bandai, Bushiroad, or any other rights holder. All product names, logos, and artwork are the property of their respective owners and are used for identification purposes only.`,
       },
       {
         heading: "2. Information accuracy",

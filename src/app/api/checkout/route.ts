@@ -11,6 +11,7 @@ import { defaultPaymentMethods } from "@/lib/payment-methods";
 import { generateOrderNumber } from "@/lib/orders";
 import { formatPrice, type CatalogProduct } from "@/lib/catalog";
 import { adminOrderNotification, orderConfirmation, sendMail } from "@/lib/emails";
+import { getNotificationEmail } from "@/lib/settings";
 
 const lineSchema = z.object({
   slug: z.string(),
@@ -108,12 +109,12 @@ export async function POST(req: Request) {
 
     await sendMail({
       to: doc.email,
-      subject: `Pokemon Rush – Order ${doc.orderNumber}`,
+      subject: `PokéStore Direct – Order ${doc.orderNumber}`,
       html: orderConfirmation(emailData),
     });
 
     await sendMail({
-      to: "meecheandboom@gmail.com",
+      to: await getNotificationEmail(),
       subject: `New order ${doc.orderNumber}`,
       html: adminOrderNotification(emailData),
     });

@@ -6,7 +6,7 @@ import { legalDocs } from "@/data/legal";
 export const metadata: Metadata = {
   title: "Legal",
   description:
-    "Terms, privacy, cookies, accessibility, and disclaimer information for Pokemon Rush.",
+    "Terms, privacy, cookies, accessibility, and disclaimer information for PokéStore Direct.",
 };
 
 export default function LegalIndexPage() {
@@ -17,7 +17,7 @@ export default function LegalIndexPage() {
       <Container size="narrow">
         <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">Legal</h1>
         <p className="mt-4 text-[16px] leading-relaxed text-[var(--ink-2)]">
-          The documents that govern your use of Pokemon Rush and our relationship with you.
+          The documents that govern your use of PokéStore Direct and our relationship with you.
         </p>
 
         <ul className="mt-14 divide-y divide-[var(--hairline)] border-y border-[var(--hairline)]">

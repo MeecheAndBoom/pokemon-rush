@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BadgeCheck, Boxes, PackageSearch, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { site } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Talk to a specialist",
@@ -28,7 +28,9 @@ const help = [
   },
 ];
 
-export default function SpecialistPage() {
+export default async function SpecialistPage() {
+  const settings = await getSiteSettings();
+
   return (
     <div className="pt-14 pb-16 sm:pt-20">
       <Container>
@@ -42,11 +44,11 @@ export default function SpecialistPage() {
             you toward the most expensive box on the shelf.
           </p>
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[16px]">
-            <a href={site.phoneHref} className="text-[var(--accent)] hover:opacity-70">
-              {site.phone}
+            <a href={settings.phoneHref} className="text-[var(--accent)] hover:opacity-70">
+              {settings.phone}
             </a>
-            <a href={`mailto:${site.salesEmail}`} className="text-[var(--accent)] hover:opacity-70">
-              {site.salesEmail}
+            <a href={`mailto:${settings.salesEmail}`} className="text-[var(--accent)] hover:opacity-70">
+              {settings.salesEmail}
             </a>
           </div>
         </div>

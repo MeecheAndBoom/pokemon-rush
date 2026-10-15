@@ -7,10 +7,18 @@ import { Menu, Search, X } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { CartLink } from "@/components/layout/CartLink";
 import { SearchBox } from "@/components/layout/SearchBox";
-import { mainNav, site } from "@/lib/site";
+import { mainNav } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-export function Header() {
+export function Header({
+  name,
+  phone,
+  phoneHref,
+}: {
+  name: string;
+  phone: string;
+  phoneHref: string;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mobileSearch, setMobileSearch] = useState(false);
@@ -35,7 +43,7 @@ export function Header() {
             href="/"
             className="shrink-0 text-[16px] font-semibold tracking-tight text-[var(--foreground)]"
           >
-            {site.name}
+            {name}
           </Link>
 
           <nav className="hidden items-center gap-9 md:flex" aria-label="Primary">
@@ -132,10 +140,10 @@ export function Header() {
                 Track an order
               </Link>
               <a
-                href={site.phoneHref}
+                href={phoneHref}
                 className="py-3 text-[17px] tracking-tight text-[var(--ink-2)]"
               >
-                {site.phone}
+                {phone}
               </a>
             </nav>
           </Container>

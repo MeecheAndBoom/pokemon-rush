@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,24 +15,42 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
-    default: "Pokemon Rush",
-    template: "%s | Pokemon Rush",
+    default: `${site.name} — Sealed Pokémon, One Piece & Weiss Schwarz Cards`,
+    template: `%s | ${site.name}`,
   },
-  description:
-    "Authentic Japanese & English Pokémon TCG, One Piece TCG, Weiss Schwarz, and sealed collectibles.",
-  metadataBase: new URL("http://localhost:3000"),
-  icons: { icon: "/favicon.ico" },
+  description: site.description,
+  applicationName: site.name,
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: `${site.name} — Sealed Pokémon, One Piece & Weiss Schwarz Cards`,
+    description: site.description,
+    url: site.url,
+    images: [{ url: "/open-graph-thumbnail-image.png", width: 1200, height: 675, alt: site.name }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — Sealed Pokémon, One Piece & Weiss Schwarz Cards`,
+    description: site.description,
+    images: ["/open-graph-thumbnail-image.png"],
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0b0c" },
-  ],
+  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }],
 };
 
 export default function RootLayout({
@@ -56,7 +75,7 @@ export default function RootLayout({
           {children}
         </div>
         <Toaster
-          position="bottom-right"
+          position="bottom-left"
           theme="light"
           closeButton
           toastOptions={{

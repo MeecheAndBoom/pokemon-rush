@@ -16,7 +16,7 @@ export default async function AdminDashboardLayout({
       <aside className="border-b border-[var(--hairline)] lg:border-b-0 lg:border-r">
         <div className="flex items-center justify-between gap-4 px-5 pt-5 pb-4">
           <div>
-            <p className="text-[14px] font-semibold tracking-tight">Pokemon Rush</p>
+            <p className="text-[14px] font-semibold tracking-tight">PokéStore Direct</p>
             <p className="text-[12px] text-[var(--ink-2)]">Admin</p>
           </div>
           <Link

@@ -1,5 +1,6 @@
 import { formatPrice } from "@/lib/catalog";
 import { shell } from "@/lib/mail";
+import { site } from "@/lib/site";
 
 export { sendMail } from "@/lib/mail";
 
@@ -51,7 +52,7 @@ export function orderConfirmation(data: OrderEmailData) {
      <div style="font-size:14px;color:#6e6e73;line-height:1.6;white-space:pre-line;">${data.paymentInstructions}</div>
      ${addressBlock(data.shippingAddress)}
      <p style="font-size:13px;color:#6e6e73;margin:24px 0 0;">
-       Questions? Reply to this email or call (313) 364-9615.
+       Questions? Reply to this email or call ${site.phone}.
      </p>`
   );
 }
@@ -80,7 +81,7 @@ export function contactAutoReply(name: string) {
     "We have your message",
     `<p style="font-size:15px;line-height:1.6;color:#6e6e73;margin:0;">
        Hi ${name || "there"}, thanks for getting in touch. A member of the team will reply within
-       one business day. If it is urgent, call (313) 364-9615.
+       one business day. If it is urgent, call ${site.phone}.
      </p>`
   );
 }

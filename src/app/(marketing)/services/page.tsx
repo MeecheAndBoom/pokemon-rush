@@ -9,12 +9,12 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-import { site } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Sealed product sourcing, pre-orders, wholesale, inspection, and storage guidance from Pokemon Rush.",
+    "Sealed product sourcing, pre-orders, wholesale, inspection, and storage guidance from PokéStore Direct.",
 };
 
 const services = [
@@ -62,7 +62,9 @@ const services = [
   },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const settings = await getSiteSettings();
+
   return (
     <div className="pt-14 pb-16 sm:pt-20">
       <Container>
@@ -139,8 +141,8 @@ export default function ServicesPage() {
             <Link href="/talk-to-a-specialist" className="text-[var(--accent)] hover:opacity-70">
               Talk to a specialist
             </Link>
-            <a href={site.phoneHref} className="text-[var(--accent)] hover:opacity-70">
-              {site.phone}
+            <a href={settings.phoneHref} className="text-[var(--accent)] hover:opacity-70">
+              {settings.phone}
             </a>
           </div>
         </div>

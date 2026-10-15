@@ -71,7 +71,7 @@ export function PostForm({
           <label className={label} htmlFor="author">
             Author
           </label>
-          <input id="author" name="author" defaultValue={post?.author ?? "Pokemon Rush"} className={input} />
+          <input id="author" name="author" defaultValue={post?.author ?? "PokéStore Direct"} className={input} />
         </div>
         <div>
           <label className={label} htmlFor="readingMinutes">

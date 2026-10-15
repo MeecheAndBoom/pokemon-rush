@@ -48,7 +48,7 @@ export const media = {
 // Background slideshow for the home hero. Replace these with the final series
 // of images when they are ready — the component handles any number of slides.
 export const heroSlides = [
-  { src: media.section.store, alt: "Pokemon Rush shelves stocked with sealed trading card product" },
+  { src: media.section.store, alt: "PokéStore Direct shelves stocked with sealed trading card product" },
   { src: media.section["one-piece"], alt: "Sealed One Piece Card Game product" },
   { src: media.section["weiss-schwarz"], alt: "Sealed Weiss Schwarz product" },
   { src: media.section.shipping, alt: "Sealed orders being packed for dispatch" },
@@ -56,12 +56,13 @@ export const heroSlides = [
 
 // Blog slug -> cover image
 export const guideCovers: Record<string, string> = {
-  "how-to-spot-a-resealed-pokemon-booster-box": media.guide.resealed,
-  "japanese-vs-english-pokemon-cards": media.guide.languages,
-  "elite-trainer-box-vs-booster-box": media.guide.etb,
-  "how-we-pack-and-ship-sealed-cards": media.guide.packing,
-  "one-piece-card-game-buying-a-case": media.guide.cases,
-  "weiss-schwarz-explained": media.guide.weiss,
+  "storing-sealed-product-humidity-light-long-hold": media.guide.packing,
+  "japanese-vs-english-print-runs-box-maths": media.guide.languages,
+  "one-piece-op15-worldwide-launch-april-restricted-list": media.guide.cases,
+  "psa-cgc-bgs-grading-value-2026": media.guide.etb,
+  "30th-celebration-set-pull-rates-sealed-prices": media.guide.cases,
+  "checking-sealed-boxes-for-reseals": media.guide.resealed,
+  "weiss-schwarz-english-2026-releases": media.guide.weiss,
 };
 
 export function guideCover(slug: string) {

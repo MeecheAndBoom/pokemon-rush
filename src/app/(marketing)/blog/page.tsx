@@ -9,7 +9,7 @@ import { guideCover, media } from "@/lib/media";
 export const metadata: Metadata = {
   title: "Blog & guides",
   description:
-    "Guides on buying, storing, and collecting sealed trading cards, written by the team at Pokemon Rush.",
+    "Guides on buying, storing, and collecting sealed trading cards, written by the team at PokéStore Direct.",
 };
 
 const topics = [
@@ -36,6 +36,7 @@ function formatDate(value: string) {
     month: "long",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   });
 }
 

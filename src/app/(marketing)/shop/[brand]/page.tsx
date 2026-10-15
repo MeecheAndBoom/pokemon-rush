@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!b) return { title: "Not found" };
   return {
     title: `${b.label} cards`,
-    description: `${b.blurb} Browse sealed ${b.label} products at Pokemon Rush.`,
+    description: `${b.blurb} Browse sealed ${b.label} products at PokéStore Direct.`,
   };
 }
 

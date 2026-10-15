@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       const buffer = Buffer.from(await file.arrayBuffer());
       const dataUri = `data:${file.type || "image/jpeg"};base64,${buffer.toString("base64")}`;
       const result = await cloudinary.uploader.upload(dataUri, {
-        folder: "pokemon-rush/products",
+        folder: "pokestore-direct/products",
         resource_type: "image",
       });
       uploaded.push({ url: result.secure_url, publicId: result.public_id });

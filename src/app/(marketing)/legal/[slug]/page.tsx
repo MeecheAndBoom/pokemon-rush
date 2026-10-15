@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { legalDocs } from "@/data/legal";
+import { getSiteSettings } from "@/lib/settings";
 
 type Params = Promise<{ slug: string }>;
 
@@ -33,9 +34,11 @@ export default async function LegalDocPage({ params }: { params: Params }) {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   });
 
   const others = Object.values(legalDocs).filter((item) => item.slug !== doc.slug);
+  const settings = await getSiteSettings();
 
   return (
     <div className="pt-14 pb-16 sm:pt-20">
@@ -87,7 +90,7 @@ export default async function LegalDocPage({ params }: { params: Params }) {
                 In short
               </p>
               <p className="mt-3 text-[15px] leading-relaxed text-[var(--ink-2)]">
-                This document is part of the agreement between you and Pokemon Rush. It is written
+                This document is part of the agreement between you and PokéStore Direct. It is written
                 to be read as a whole. If anything here is unclear, ask us before you order and we
                 will explain it in plain language.
               </p>
@@ -111,12 +114,12 @@ export default async function LegalDocPage({ params }: { params: Params }) {
               <p className="mt-3 text-[16px] leading-relaxed text-[var(--ink-2)]">
                 Email{" "}
                 <a
-                  href="mailto:support@pokemonrush.com"
+                  href={`mailto:${settings.email}`}
                   className="text-[var(--accent)] hover:opacity-70"
                 >
-                  support@pokemonrush.com
+                  {settings.email}
                 </a>{" "}
-                or call (313) 364-9615. We will respond as plainly as we can.
+                or call {settings.phone}. We will respond as plainly as we can.
               </p>
             </section>
 

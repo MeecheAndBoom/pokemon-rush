@@ -7,7 +7,7 @@ import { supportFaqs } from "@/data/faq";
 export const metadata: Metadata = {
   title: "Support",
   description:
-    "Answers to common questions about orders, payment, shipping, and returns at Pokemon Rush.",
+    "Answers to common questions about orders, payment, shipping, and returns at PokéStore Direct.",
 };
 
 export default function SupportPage() {

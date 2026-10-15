@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Clock, Globe, PackageCheck, ShieldAlert, Truck } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-import { site } from "@/lib/site";
+import { getSiteSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Shipping & delivery",
-  description: "How orders are processed, packed, and shipped from Pokemon Rush.",
+  description: "How orders are processed, packed, and shipped from PokéStore Direct.",
 };
 
 const sections = [
@@ -36,7 +36,9 @@ const sections = [
   },
 ];
 
-export default function ShippingPage() {
+export default async function ShippingPage() {
+  const settings = await getSiteSettings();
+
   return (
     <div className="pt-14 pb-16 sm:pt-20">
       <Container>
@@ -67,7 +69,7 @@ export default function ShippingPage() {
             <h2 className="mt-5 text-[19px] font-semibold tracking-tight">Need a delivery estimate?</h2>
             <p className="mt-3 text-[15px] leading-relaxed text-[var(--ink-2)]">
               Tell us your address and what you are ordering and we will give you the fastest and
-              most economical options we can offer. Call {site.phone} or email {site.email}.
+              most economical options we can offer. Call {settings.phone} or email {settings.email}.
             </p>
           </div>
         </div>
