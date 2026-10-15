@@ -27,6 +27,8 @@ export type ListingView = {
   brandChips: ListingChip[] | null;
   facetChips: ListingChip[];
   sortChips: ListingChip[];
+  /** Same page with every brand/language/type filter removed, keeping search and sort. */
+  clearFiltersHref: string;
   query: string;
   total: number;
   /** 1-based index of the first visible product, or 0 when empty. */
@@ -177,6 +179,11 @@ export function buildListingView(input: ListingInput): ListingView {
     brandChips,
     facetChips,
     sortChips,
+    clearFiltersHref: shopHref(basePath, base, {
+      brand: undefined,
+      language: undefined,
+      type: undefined,
+    }),
     query: q,
     total,
     from: total === 0 ? 0 : start + 1,
