@@ -131,9 +131,9 @@ export default function CheckoutPage() {
 
         <form
           onSubmit={onSubmit}
-          className="mt-12 grid gap-14 lg:grid-cols-[1.5fr_1fr] lg:gap-20"
+          className="mt-12 grid grid-cols-1 gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-20"
         >
-          <div className="space-y-12">
+          <div className="min-w-0 space-y-12">
             <fieldset className="space-y-5">
               <legend className="text-[17px] font-semibold tracking-tight">Contact</legend>
               <div className="grid gap-5 sm:grid-cols-2">
@@ -295,7 +295,7 @@ export default function CheckoutPage() {
             </fieldset>
           </div>
 
-          <aside className="lg:sticky lg:top-24 lg:self-start">
+          <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
             <h2 className="text-[17px] font-semibold tracking-tight">Order summary</h2>
             <ul className="mt-5 space-y-4">
               {lines.map((line) => (
@@ -312,10 +312,10 @@ export default function CheckoutPage() {
                     ) : null}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-[14px] leading-snug">{line.name}</p>
+                    <p className="line-clamp-2 text-[14px] leading-snug">{line.name}</p>
                     <p className="text-[13px] text-[var(--ink-2)]">Qty {line.quantity}</p>
                   </div>
-                  <p className="text-[14px] tabular-nums">
+                  <p className="shrink-0 text-[14px] tabular-nums">
                     {formatPrice(line.price * line.quantity, line.currency)}
                   </p>
                 </li>

@@ -45,13 +45,13 @@ export default function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="mt-12 grid gap-14 lg:grid-cols-[1.6fr_1fr] lg:gap-20">
+          <div className="mt-12 grid grid-cols-1 gap-14 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:gap-20">
             <ul className="divide-y divide-[var(--hairline)] border-y border-[var(--hairline)]">
               {lines.map((line) => (
-                <li key={line.slug} className="flex gap-5 py-6">
+                <li key={line.slug} className="flex gap-4 py-6 sm:gap-5">
                   <Link
                     href={`/shop/product/${line.slug}`}
-                    className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-[var(--surface-2)]"
+                    className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-[var(--surface-2)] sm:h-24 sm:w-24"
                   >
                     {line.image ? (
                       <Image
@@ -64,11 +64,11 @@ export default function CartPage() {
                     ) : null}
                   </Link>
 
-                  <div className="flex flex-1 flex-col justify-between gap-4 sm:flex-row sm:items-start">
-                    <div className="max-w-sm">
+                  <div className="flex min-w-0 flex-1 flex-col justify-between gap-4 sm:flex-row sm:items-start">
+                    <div className="min-w-0 max-w-sm">
                       <Link
                         href={`/shop/product/${line.slug}`}
-                        className="text-[15px] leading-snug tracking-tight hover:text-[var(--accent)]"
+                        className="break-words text-[15px] leading-snug tracking-tight hover:text-[var(--accent)]"
                       >
                         {line.name}
                       </Link>
@@ -77,7 +77,7 @@ export default function CartPage() {
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-3 sm:flex-nowrap sm:gap-6">
                       <div className="flex items-center rounded-full border border-[var(--hairline)]">
                         <button
                           type="button"
@@ -115,7 +115,7 @@ export default function CartPage() {
               ))}
             </ul>
 
-            <aside className="lg:sticky lg:top-24 lg:self-start">
+            <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
               <h2 className="text-[17px] font-semibold tracking-tight">Summary</h2>
               <dl className="mt-5 space-y-3 text-[15px]">
                 <div className="flex justify-between">
