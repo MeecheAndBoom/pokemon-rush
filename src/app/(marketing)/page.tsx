@@ -5,6 +5,7 @@ import { faqJsonLd, seoMetadata } from "@/lib/seo";
 import {
   BadgeCheck,
   Boxes,
+  ChevronRight,
   CreditCard,
   ExternalLink,
   Headphones,
@@ -108,30 +109,38 @@ export default async function HomePage() {
     <>
       <JsonLd data={faqJsonLd(supportFaqs.slice(0, 6))} />
       {/* 1. Hero */}
-      <section className="relative isolate overflow-hidden border-b border-[var(--hairline)] pt-14 pb-14 sm:pt-20 sm:pb-20">
+      <section className="relative isolate overflow-hidden border-b border-[var(--hairline)] pt-16 pb-16 sm:pt-24 sm:pb-24">
         <div
           className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-[var(--tint-yellow)] via-[var(--background)] to-[var(--background)]"
           aria-hidden="true"
         />
         <Container className="relative">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_1fr] lg:gap-16">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
             <div className="max-w-xl">
-              <h1 className="text-[38px] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-[50px] lg:text-[54px]">
+              <h1 className="text-balance text-[clamp(2.5rem,1.35rem_+_3.5vw,3.9rem)] font-semibold leading-[1.03] tracking-[-0.035em]">
                 Trading cards, sealed and ready to ship.
               </h1>
-              <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-[var(--ink-2)] sm:text-[19px]">
+              <p className="mt-6 max-w-[33rem] text-[clamp(1.0625rem,0.95rem_+_0.5vw,1.3125rem)] leading-[1.55] text-[var(--ink-2)]">
                 Factory-sealed Pokémon, One Piece, and Weiss Schwarz. Checked before dispatch and
                 packed to arrive exactly as it left — across Japan, North America, Europe, and beyond.
               </p>
-              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-[17px]">
-                <Link href="/shop" className="text-[var(--accent)] transition-opacity hover:opacity-70">
+              <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+                <Link
+                  href="/shop"
+                  className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--accent)] px-7 text-[16px] font-medium text-white transition-[transform,background-color] duration-150 ease-out hover:bg-[var(--accent-hover)] active:scale-[0.97]"
+                >
                   Shop all cards
                 </Link>
                 <Link
                   href="/talk-to-a-specialist"
-                  className="text-[var(--accent)] transition-opacity hover:opacity-70"
+                  className="group inline-flex items-center gap-1.5 text-[16px] font-medium text-[var(--accent)] transition-colors duration-150 hover:text-[var(--accent-hover)]"
                 >
                   Talk to a specialist
+                  <ChevronRight
+                    className="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                    strokeWidth={2.25}
+                    aria-hidden="true"
+                  />
                 </Link>
               </div>
             </div>

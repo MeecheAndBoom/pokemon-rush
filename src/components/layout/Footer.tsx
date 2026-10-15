@@ -11,7 +11,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer className="mt-24 border-t border-[var(--hairline)] bg-[var(--surface-2)]">
       <Container size="wide" className="py-16">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_repeat(4,1fr)]">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_repeat(4,minmax(0,1fr))]">
           <div>
             <Link href="/" aria-label={settings.name} className="inline-flex">
               <Image
