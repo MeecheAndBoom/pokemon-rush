@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
+import { breadcrumbJsonLd, contactPageJsonLd, seoMetadata } from "@/lib/seo";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getSiteSettings } from "@/lib/settings";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Contact PokéStore Direct about an order, a release, or wholesale.",
-};
+export const metadata: Metadata = seoMetadata("/contact");
 
 export default async function ContactPage() {
   const settings = await getSiteSettings();
@@ -22,17 +21,10 @@ export default async function ContactPage() {
     },
     {
       icon: Mail,
-      label: "Support",
+      label: "Email",
       value: settings.email,
       href: `mailto:${settings.email}`,
-      note: "Order questions, returns, and delivery.",
-    },
-    {
-      icon: Mail,
-      label: "Sales & wholesale",
-      value: settings.salesEmail,
-      href: `mailto:${settings.salesEmail}`,
-      note: "Sourcing requests, bulk pricing, and partnerships.",
+      note: "Orders, returns, delivery, sourcing and wholesale.",
     },
     {
       icon: MapPin,
@@ -44,6 +36,22 @@ export default async function ContactPage() {
 
   return (
     <div className="pt-14 pb-16 sm:pt-20">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
+      <JsonLd
+        data={contactPageJsonLd({
+          name: settings.name,
+          description: settings.description,
+          email: settings.email,
+          phone: settings.phone,
+          addressLine: settings.addressLine,
+          address: settings.address,
+        })}
+      />
       <Container>
         <div className="max-w-3xl">
           <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">Contact</h1>

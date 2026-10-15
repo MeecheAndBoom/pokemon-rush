@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
+import { seoMetadata } from "@/lib/seo";
 import { Clock, Globe, PackageCheck, ShieldAlert, Truck } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { getSiteSettings } from "@/lib/settings";
 
-export const metadata: Metadata = {
-  title: "Shipping & delivery",
-  description: "How orders are processed, packed, and shipped from PokéStore Direct.",
-};
+export const metadata: Metadata = seoMetadata("/shipping-delivery");
 
 const sections = [
   {

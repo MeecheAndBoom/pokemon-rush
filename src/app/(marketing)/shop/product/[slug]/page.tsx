@@ -5,7 +5,10 @@ import { Container } from "@/components/layout/Container";
 import { AddToCart } from "@/components/commerce/AddToCart";
 import { ProductGallery } from "@/components/commerce/ProductGallery";
 import { ProductGrid } from "@/components/commerce/ProductGrid";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { catalog, formatPrice, getProduct, brandLabels } from "@/lib/catalog";
+import { getSiteSettings } from "@/lib/settings";
+import { breadcrumbJsonLd, metaDescription, pageMetadata, productJsonLd } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -16,21 +19,27 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const product = getProduct(slug);
-  if (!product) return { title: "Not found" };
-  return {
+  if (!product) return { title: "Product not found", robots: { index: false } };
+  const brand = brandLabels[product.brand] ?? product.brand;
+  return pageMetadata({
     title: product.name,
-    description: product.description.slice(0, 160),
-    openGraph: {
-      title: product.name,
-      images: product.images[0]?.url ? [product.images[0].url] : undefined,
-    },
-  };
+    description: metaDescription(product.description),
+    path: `/shop/product/${product.slug}`,
+    keywords: [product.name, brand, product.setName, ...product.tags]
+      .filter((value): value is string => Boolean(value))
+      .slice(0, 10),
+    // Images come from the colocated opengraph-image route.
+    image: null,
+  });
 }
 
 export default async function ProductPage({ params }: { params: Params }) {
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) notFound();
+
+  const settings = await getSiteSettings();
+  const brand = brandLabels[product.brand] ?? product.brand;
 
   const related = catalog
     .filter(
@@ -41,27 +50,27 @@ export default async function ProductPage({ params }: { params: Params }) {
     )
     .slice(0, 4);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description: product.description,
-    image: product.images.map((i) => i.url),
-    brand: { "@type": "Brand", name: product.brand },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: product.currency,
-      price: (product.price / 100).toFixed(2),
-      availability: "https://schema.org/InStock",
-    },
+  const profile = {
+    name: settings.name,
+    description: settings.description,
+    email: settings.email,
+    phone: settings.phone,
+    addressLine: settings.addressLine,
+    address: settings.address,
   };
+
+  const jsonLd = productJsonLd(product, profile);
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Shop", path: "/shop" },
+    { name: brand, path: `/shop/${product.brand}` },
+    { name: product.name, path: `/shop/product/${product.slug}` },
+  ]);
 
   return (
     <div className="pt-10 pb-10 sm:pt-14">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbs} />
       <Container>
         <p className="text-[13px] text-[var(--ink-2)]">
           <Link href="/shop" className="hover:text-[var(--foreground)]">
@@ -72,7 +81,7 @@ export default async function ProductPage({ params }: { params: Params }) {
             href={`/shop/${product.brand}`}
             className="hover:text-[var(--foreground)]"
           >
-            {brandLabels[product.brand] ?? product.brand}
+            {brand}
           </Link>
         </p>
 

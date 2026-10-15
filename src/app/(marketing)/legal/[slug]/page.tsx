@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { legalDocs } from "@/data/legal";
+import { pageMetadata } from "@/lib/seo";
 import { getSiteSettings } from "@/lib/settings";
 
 type Params = Promise<{ slug: string }>;
@@ -21,8 +22,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const doc = legalDocs[slug];
-  if (!doc) return { title: "Not found" };
-  return { title: doc.title, description: doc.description };
+  if (!doc) return { title: "Not found", robots: { index: false } };
+  return pageMetadata({
+    title: doc.title,
+    description: doc.description,
+    path: `/legal/${slug}`,
+  });
 }
 
 export default async function LegalDocPage({ params }: { params: Params }) {

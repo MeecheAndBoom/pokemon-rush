@@ -1,16 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { seoMetadata, breadcrumbJsonLd, itemListJsonLd } from "@/lib/seo";
 import { Container } from "@/components/layout/Container";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { posts } from "@/data/posts";
 import { guideCover, media } from "@/lib/media";
 
-export const metadata: Metadata = {
-  title: "Blog & guides",
-  description:
-    "Guides on buying, storing, and collecting sealed trading cards, written by the team at PokéStore Direct.",
-};
+// The colocated opengraph-image route renders the social card.
+export const metadata: Metadata = seoMetadata("/blog", { image: null });
 
 const topics = [
   {
@@ -45,6 +44,18 @@ export default function BlogPage() {
 
   return (
     <div className="pt-14 pb-16 sm:pt-20">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Blog & guides", path: "/blog" },
+        ])}
+      />
+      <JsonLd
+        data={itemListJsonLd(
+          "Sealed TCG guides & market notes",
+          posts.map((post) => ({ name: post.title, path: `/blog/${post.slug}` }))
+        )}
+      />
       <Container>
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>

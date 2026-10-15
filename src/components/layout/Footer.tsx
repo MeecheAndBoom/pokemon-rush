@@ -1,8 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { footerNav } from "@/lib/site";
+import { BRAND_LOGO_PATH } from "@/lib/brand";
 import type { SiteSettings } from "@/lib/settings";
 
 export function Footer({ settings }: { settings: SiteSettings }) {
@@ -11,7 +13,17 @@ export function Footer({ settings }: { settings: SiteSettings }) {
       <Container size="wide" className="py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div>
-            <p className="text-[15px] font-semibold tracking-tight">{settings.name}</p>
+            <Link href="/" aria-label={settings.name} className="inline-flex">
+              <Image
+                src={BRAND_LOGO_PATH}
+                alt={settings.name}
+                width={900}
+                height={309}
+                sizes="160px"
+                className="h-9 w-auto"
+              />
+            </Link>
+            <p className="mt-4 text-[15px] font-semibold tracking-tight">{settings.name}</p>
             <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-[var(--ink-2)]">
               {settings.description}
             </p>

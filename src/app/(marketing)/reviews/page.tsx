@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
+import { seoMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Stars } from "@/components/content/Stars";
 import { reviewSummary, reviews } from "@/data/reviews";
 
-export const metadata: Metadata = {
-  title: "Reviews",
-  description:
-    "Read what collectors say about buying sealed Pokémon, One Piece, and Weiss Schwarz products from PokéStore Direct.",
-};
+export const metadata: Metadata = seoMetadata("/reviews");
 
 export default function ReviewsPage() {
   return (

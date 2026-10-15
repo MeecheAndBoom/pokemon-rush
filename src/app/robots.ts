@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+import { siteUrl } from "@/lib/site-url";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,9 +7,23 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api", "/checkout", "/cart"],
+        disallow: [
+          "/admin",
+          "/admin/",
+          "/api/",
+          "/cart",
+          "/checkout",
+          "/checkout/",
+        ],
+      },
+      // Image and rich-result crawlers are explicitly welcome on product media.
+      {
+        userAgent: ["Googlebot-Image", "Bingbot", "Googlebot"],
+        allow: "/",
+        disallow: ["/admin", "/api/", "/cart", "/checkout"],
       },
     ],
-    sitemap: `${base}/sitemap.xml`,
+    sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }

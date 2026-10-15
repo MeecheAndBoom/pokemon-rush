@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
+import { seoMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { supportFaqs } from "@/data/faq";
+import { faqJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Support",
-  description:
-    "Answers to common questions about orders, payment, shipping, and returns at PokéStore Direct.",
-};
+export const metadata: Metadata = seoMetadata("/support");
 
 export default function SupportPage() {
   return (
     <div className="pt-14 pb-10 sm:pt-20">
+      <JsonLd data={faqJsonLd(supportFaqs)} />
       <Container size="narrow">
         <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">Support</h1>
         <p className="mt-4 text-[16px] leading-relaxed text-[var(--ink-2)]">

@@ -5,15 +5,15 @@ import { ProductGrid } from "@/components/commerce/ProductGrid";
 import { Pagination } from "@/components/commerce/Pagination";
 import { SearchBox } from "@/components/layout/SearchBox";
 import { DecorativeArt } from "@/components/content/DecorativeArt";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { brands, filterProducts, languages, productTypes } from "@/lib/catalog";
 import { media } from "@/lib/media";
 import { cn } from "@/lib/utils";
+import { breadcrumbJsonLd, collectionPageJsonLd, seoMetadata } from "@/lib/seo";
+import { pageSeo } from "@/data/seo";
 
-export const metadata: Metadata = {
-  title: "Shop all trading cards",
-  description:
-    "Browse every sealed Pokémon, One Piece, and Weiss Schwarz product we stock, including booster boxes, bundles, Elite Trainer Boxes, and cases.",
-};
+// The colocated opengraph-image route renders the social card.
+export const metadata: Metadata = seoMetadata("/shop", { image: null });
 
 type SearchParams = Promise<{
   brand?: string;
@@ -73,6 +73,20 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
 
   return (
     <div className="pb-16">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Shop", path: "/shop" },
+        ])}
+      />
+      <JsonLd
+        data={collectionPageJsonLd({
+          name: pageSeo["/shop"].title,
+          description: pageSeo["/shop"].description,
+          path: "/shop",
+          products: items,
+        })}
+      />
       <section className="relative overflow-hidden border-b border-[var(--hairline)] bg-gradient-to-b from-[var(--tint-blue)] to-[var(--background)]">
         <DecorativeArt
           src={media.art.goku}

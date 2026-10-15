@@ -14,13 +14,11 @@ import {
 import { Container } from "@/components/layout/Container";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { FaqList } from "@/components/content/FaqList";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { media } from "@/lib/media";
+import { faqJsonLd, seoMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Wholesale",
-  description:
-    "Wholesale and bulk pricing on sealed Pokémon, One Piece, and Weiss Schwarz boxes and cases.",
-};
+export const metadata: Metadata = seoMetadata("/wholesale");
 
 const audiences = [
   {
@@ -78,6 +76,7 @@ const faqs = [
 export default function WholesalePage() {
   return (
     <div className="pt-14 pb-16 sm:pt-20">
+      <JsonLd data={faqJsonLd(faqs)} />
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>

@@ -1,8 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { logoutAction, requireSession } from "@/app/admin/actions/auth";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Admin",
+  robots: { index: false, follow: false, nocache: true },
+};
 
 export default async function AdminDashboardLayout({
   children,

@@ -4,8 +4,12 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { Prose } from "@/components/content/Prose";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getPost, posts } from "@/data/posts";
 import { guideCover } from "@/lib/media";
+import { getSiteSettings } from "@/lib/settings";
+import { articleJsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { postSeo } from "@/data/seo";
 
 type Params = Promise<{ slug: string }>;
 
@@ -16,17 +20,20 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
-  if (!post) return { title: "Not found" };
-  return {
-    title: post.title,
-    description: post.excerpt,
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.excerpt,
-      publishedTime: post.date,
-    },
-  };
+  if (!post) return { title: "Article not found", robots: { index: false } };
+  const seo = postSeo[post.slug];
+  return pageMetadata({
+    title: seo?.title ?? post.title,
+    description: seo?.description ?? post.excerpt,
+    path: `/blog/${post.slug}`,
+    keywords: seo?.keywords ?? [post.category, "sealed trading cards"],
+    type: "article",
+    publishedTime: post.date,
+    authors: [post.author],
+    section: post.category,
+    // The colocated opengraph-image route renders the card.
+    image: null,
+  });
 }
 
 export default async function PostPage({ params }: { params: Params }) {
@@ -34,23 +41,39 @@ export default async function PostPage({ params }: { params: Params }) {
   const post = getPost(slug);
   if (!post) notFound();
 
+  const settings = await getSiteSettings();
   const more = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: post.title,
-    description: post.excerpt,
-    author: { "@type": "Organization", name: post.author },
-    datePublished: post.date,
-  };
+  const article = articleJsonLd(
+    {
+      title: post.title,
+      description: post.excerpt,
+      slug: post.slug,
+      date: post.date,
+      author: post.author,
+      category: post.category,
+      image: guideCover(post.slug),
+    },
+    {
+      name: settings.name,
+      description: settings.description,
+      email: settings.email,
+      phone: settings.phone,
+      addressLine: settings.addressLine,
+      address: settings.address,
+    }
+  );
+
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
 
   return (
     <article className="pt-14 pb-10 sm:pt-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={article} />
+      <JsonLd data={breadcrumbs} />
       <Container size="narrow">
         <p className="text-[13px] text-[var(--ink-2)]">
           <Link href="/blog" className="hover:text-[var(--foreground)]">

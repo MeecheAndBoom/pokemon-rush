@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, Search, X } from "lucide-react";
@@ -39,11 +40,16 @@ export function Header({
     <header className="sticky top-0 z-50 border-b border-[var(--hairline)] bg-[color-mix(in_srgb,var(--background)_82%,transparent)] backdrop-blur-xl backdrop-saturate-150">
       <Container size="wide">
         <div className="flex h-14 items-center justify-between gap-4 sm:h-16">
-          <Link
-            href="/"
-            className="shrink-0 text-[16px] font-semibold tracking-tight text-[var(--foreground)]"
-          >
-            {name}
+          <Link href="/" className="flex shrink-0 items-center" aria-label={name}>
+            <Image
+              src="/brand/pokestore-direct-logo.png"
+              alt={name}
+              width={900}
+              height={309}
+              priority
+              sizes="140px"
+              className="h-9 w-auto sm:h-10"
+            />
           </Link>
 
           <nav className="hidden items-center gap-9 md:flex" aria-label="Primary">

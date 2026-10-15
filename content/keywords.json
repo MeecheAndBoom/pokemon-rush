@@ -1,0 +1,277 @@
+{
+  "generatedAt": "2026-10-15",
+  "method": "google-autocomplete + bing-autosuggest + duckduckgo-serp",
+  "pages": [
+    {
+      "path": "/",
+      "primary": "sealed pokemon cards",
+      "secondary": ["factory sealed trading cards", "buy sealed pokemon cards", "sealed tcg product online"],
+      "title": "Sealed Pokémon, One Piece & Weiss Schwarz Cards",
+      "description": "Factory-sealed Pokémon, One Piece and Weiss Schwarz cards. Booster boxes, ETBs, bundles and cases, checked before dispatch and shipped worldwide."
+    },
+    {
+      "path": "/shop",
+      "primary": "buy sealed trading cards online",
+      "secondary": ["sealed trading cards", "tcg booster boxes for sale", "pokemon one piece weiss schwarz"],
+      "title": "Buy Sealed Trading Cards Online | Pokémon, One Piece",
+      "description": "Shop factory-sealed booster boxes, ETBs, bundles and cases for Pokémon, One Piece and Weiss Schwarz. Authentic product, packed to arrive sealed."
+    },
+    {
+      "path": "/shop/pokemon",
+      "primary": "pokemon booster box",
+      "secondary": ["elite trainer box", "pokemon booster bundle", "sealed pokemon cards for sale", "japanese pokemon booster box"],
+      "title": "Sealed Pokémon Booster Boxes & ETBs",
+      "description": "Buy factory-sealed Pokémon booster boxes, Elite Trainer Boxes and bundles, English and Japanese. Inspected for reseals before dispatch. Ships worldwide."
+    },
+    {
+      "path": "/shop/one-piece",
+      "primary": "one piece card game booster box",
+      "secondary": ["one piece tcg english booster box", "one piece sealed case", "one piece starter deck"],
+      "title": "Sealed One Piece Card Game Booster Boxes & Cases",
+      "description": "Buy sealed One Piece Card Game booster boxes, cases and starter decks, English and Japanese. Factory-sealed, checked and shipped worldwide."
+    },
+    {
+      "path": "/shop/weiss-schwarz",
+      "primary": "weiss schwarz booster box",
+      "secondary": ["weiss schwarz english booster box", "weiss schwarz trial deck", "weiss schwarz japanese booster box"],
+      "title": "Sealed Weiss Schwarz Booster Boxes | English & JP",
+      "description": "Shop sealed Weiss Schwarz booster boxes and trial decks, English and Japanese, including English-exclusive sets. Authentic product, shipped worldwide."
+    },
+    {
+      "path": "/shop/accessories",
+      "primary": "pokemon card sleeves",
+      "secondary": ["toploaders", "card storage box", "booster box protector"],
+      "title": "Card Sleeves, Toploaders & Storage Accessories",
+      "description": "Protect your cards with sleeves, toploaders, storage boxes and booster box protectors. Accessories chosen for sealed and graded collections."
+    },
+    {
+      "path": "/services",
+      "primary": "tcg sourcing service",
+      "secondary": ["sealed case sourcing", "card pre-order service", "collector advice"],
+      "title": "TCG Sourcing, Pre-Orders & Collector Advice",
+      "description": "Need a set, language or case we do not list? We source sealed Pokémon, One Piece and Weiss Schwarz, take pre-orders and give collector advice."
+    },
+    {
+      "path": "/about",
+      "primary": "sealed tcg specialist store",
+      "secondary": ["authentic sealed pokemon seller", "pokestore direct"],
+      "title": "About PokéStore Direct | Sealed TCG Specialists",
+      "description": "We sell factory-sealed Pokémon, One Piece and Weiss Schwarz only. Sourced through official distribution and checked before every order ships."
+    },
+    {
+      "path": "/support",
+      "primary": "sealed trading card order help",
+      "secondary": ["pokemon card order faq", "pre-order cancellation", "tracking help"],
+      "title": "Support & FAQs | PokéStore Direct",
+      "description": "Answers on ordering, payment, shipping, tracking and pre-orders for sealed Pokémon, One Piece and Weiss Schwarz product. Contact a real person any time."
+    },
+    {
+      "path": "/shipping-delivery",
+      "primary": "worldwide trading card shipping",
+      "secondary": ["sealed pokemon shipping", "how long does shipping take", "packed to arrive sealed"],
+      "title": "Shipping & Delivery | Worldwide Sealed Card Orders",
+      "description": "How we pack and ship factory-sealed trading cards worldwide, dispatch times, tracking, and what to do if a parcel is delayed or arrives damaged."
+    },
+    {
+      "path": "/returns-refunds",
+      "primary": "sealed trading card returns",
+      "secondary": ["can i return pokemon cards", "pre-order refund", "damaged parcel policy"],
+      "title": "Returns & Refunds | Sealed Trading Cards",
+      "description": "Our returns and refund policy for sealed trading cards, including damaged parcels, pre-order cancellations and what cannot be returned once opened."
+    },
+    {
+      "path": "/wholesale",
+      "primary": "wholesale pokemon cards",
+      "secondary": ["wholesale one piece cards", "bulk sealed cases", "tcg wholesale usa"],
+      "title": "Wholesale Sealed TCG | Pokémon, One Piece & Weiss",
+      "description": "Wholesale and bulk pricing on sealed Pokémon, One Piece and Weiss Schwarz cases for shops, breakers and resellers. Tell us what you need."
+    },
+    {
+      "path": "/blog/storing-sealed-product-humidity-light-long-hold",
+      "primary": "how to store pokemon booster boxes",
+      "secondary": ["sealed pokemon storage", "humidity pokemon cards", "best way to store sealed product"],
+      "title": "How to Store Sealed Pokémon Product: Humidity & Light",
+      "description": "A storage routine for sealed Pokémon product: 40 to 50 percent humidity, stable temperature, no direct sun, and why the garage and attic ruin boxes."
+    },
+    {
+      "path": "/blog/japanese-vs-english-print-runs-box-maths",
+      "primary": "japanese vs english pokemon cards",
+      "secondary": ["how many packs in a japanese booster box", "japanese booster box vs english", "why are japanese pokemon cards cheaper"],
+      "title": "Japanese vs English Pokémon Boxes: Print Run Maths",
+      "description": "An English box is 36 packs of 10; a Japanese box is 30 packs of 5. What that difference means for pull density, print quality, price and resale."
+    },
+    {
+      "path": "/blog/one-piece-op15-worldwide-launch-april-restricted-list",
+      "primary": "one piece op-15",
+      "secondary": ["one piece card game restricted list", "op-15 release date", "adventure on kami's island"],
+      "title": "One Piece OP-15 Launch & the April 2026 Restricted List",
+      "description": "OP-15 Adventure on Kami's Island launched worldwide on 3 April 2026. What the April restricted list changed, and what a sealed display actually contains."
+    },
+    {
+      "path": "/blog/psa-cgc-bgs-grading-value-2026",
+      "primary": "psa grading cost",
+      "secondary": ["cgc pokemon grading", "bgs vs psa", "is grading pokemon cards worth it"],
+      "title": "PSA vs CGC vs BGS: Pokémon Grading Value 2026",
+      "description": "PSA 10s outsell CGC 10s and BGS 9.5s on identical cards, but 2026 fees changed again. How to run the break-even sum before you submit a card."
+    },
+    {
+      "path": "/blog/30th-celebration-set-pull-rates-sealed-prices",
+      "primary": "pokemon 30th anniversary",
+      "secondary": ["30th celebration pull rates", "30th anniversary etb", "pokemon 30th anniversary card list"],
+      "title": "30th Celebration Pull Rates & Sealed Prices",
+      "description": "Inside the 30th Celebration set: five foils per pack, a Classic Collection card in about 1 in 10 packs, and what the anniversary did to sealed prices."
+    },
+    {
+      "path": "/blog/checking-sealed-boxes-for-reseals",
+      "primary": "how to tell if a pokemon box is resealed",
+      "secondary": ["resealed pokemon booster box", "fake pokemon box", "factory sealed check"],
+      "title": "How to Check a Sealed Pokémon Box for Reseals",
+      "description": "Seams, factory vent holes, printed Pokéball logos, weight and glue. The checks we run on every sealed box before it reaches a shelf."
+    },
+    {
+      "path": "/blog/weiss-schwarz-english-2026-releases",
+      "primary": "weiss schwarz english 2026 releases",
+      "secondary": ["weiss schwarz release schedule 2026", "weiss schwarz english booster box", "what is weiss schwarz"],
+      "title": "Weiss Schwarz English 2026 Release Schedule & Sets",
+      "description": "Weiss Schwarz English added Umamusume, Blue Archive, NIKKE and more in 2026. A tour of the year, and why English-exclusive cards hold value."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How many packs are in a Pokémon booster box?",
+      "answer": "English main-line Pokémon booster boxes hold 36 packs of 10 cards. Japanese main-line booster boxes hold 30 packs of 5 cards. Special sets and older products can differ."
+    },
+    {
+      "question": "How many packs are in a Japanese Pokémon booster box?",
+      "answer": "A Japanese main-line Pokémon booster box typically holds 30 packs of 5 cards, for 150 cards in total. Some special sets are sold in different pack counts."
+    },
+    {
+      "question": "How many cards are in a Pokémon booster pack?",
+      "answer": "English main-line Pokémon booster packs contain 10 cards. Japanese main-line packs contain 5 cards. Special sets can use different counts."
+    },
+    {
+      "question": "What is an Elite Trainer Box?",
+      "answer": "An Elite Trainer Box is a sealed Pokémon TCG product that includes booster packs plus card sleeves, dice, condition markers, a player's guide and a storage box."
+    },
+    {
+      "question": "What is a booster bundle?",
+      "answer": "A booster bundle is a sealed bundle of booster packs sold without the extras of an Elite Trainer Box. Recent Pokémon booster bundles commonly contain six packs."
+    },
+    {
+      "question": "What is a booster box case?",
+      "answer": "A case is a sealed factory carton holding multiple booster boxes. Pokémon cases commonly hold six boxes and One Piece cases commonly hold twelve displays, so always check the listing."
+    },
+    {
+      "question": "Do you sell single cards or only sealed product?",
+      "answer": "PokéStore Direct sells factory-sealed product only, including booster boxes, Elite Trainer Boxes, booster bundles, sealed cases and accessories. We do not sell single cards."
+    },
+    {
+      "question": "Are PokéStore Direct products factory sealed?",
+      "answer": "Yes. Every item we sell is factory-sealed, and we inspect the seals, corners and edges before dispatch."
+    },
+    {
+      "question": "How do you check a sealed box for reseals?",
+      "answer": "We check for a single continuous shrink-wrap seam, factory vent holes, printed Pokéball logos, weight against a reference box, and print quality. Three independent checks must agree before a box is listed."
+    },
+    {
+      "question": "How can I tell if a Pokémon booster box is resealed?",
+      "answer": "Look for a second or angled shrink-wrap seam, missing factory vent holes, missing printed Pokéball logos, tape residue, or a weight noticeably lighter than a known box. Modern factory wrap has a single seam per panel and small vent holes."
+    },
+    {
+      "question": "Can you weigh Pokémon packs to find hits?",
+      "answer": "Weighing is unreliable on modern Pokémon product because most packs contain a reverse holo or better and pack weights overlap. Buying factory-sealed product avoids the risk of searched or weighed stock."
+    },
+    {
+      "question": "Is it better to buy Japanese or English Pokémon cards?",
+      "answer": "Japanese product is often cheaper to open and is prized for print quality and exclusive artwork, while English product has the deeper international buyer pool and higher resale on the same artwork. Many collectors buy Japanese to open and English to hold."
+    },
+    {
+      "question": "Why are Japanese Pokémon cards cheaper than English?",
+      "answer": "Japanese sets are printed in larger volume relative to domestic demand, which keeps unit prices lower. Growing export demand has been narrowing the gap."
+    },
+    {
+      "question": "Are Japanese Pokémon cards worth more than English?",
+      "answer": "Not as a blanket rule. English cards generally fetch higher secondary prices for the same artwork because the buyer pool is deeper, while specific Japanese cards and exclusive prints can command a premium."
+    },
+    {
+      "question": "Are Pokémon booster boxes a good investment?",
+      "answer": "Out-of-print sealed product has historically appreciated, while sets still in distribution tend to trade near retail. Returns are not guaranteed and vary by set."
+    },
+    {
+      "question": "Does Pokémon reprint booster boxes?",
+      "answer": "Yes. Pokémon reprints popular sets, so product still being printed tends to trade near retail while out-of-print product can appreciate."
+    },
+    {
+      "question": "How should I store sealed Pokémon product?",
+      "answer": "Aim for a stable 40 to 50 percent relative humidity at 18 to 24 degrees Celsius, keep product out of direct sunlight, store boxes no more than two high, and avoid attics, garages and basements."
+    },
+    {
+      "question": "Does humidity damage Pokémon cards?",
+      "answer": "Yes. Paper takes on and gives off moisture as conditions change; below about 30 percent relative humidity cardstock becomes brittle, and above 60 percent it risks mould, warping and chemical breakdown."
+    },
+    {
+      "question": "When did One Piece OP-15 release?",
+      "answer": "OP-15, Adventure on Kami's Island, launched worldwide on 3 April 2026. It covers the Skypiea arc."
+    },
+    {
+      "question": "What changed on the One Piece restricted list in April 2026?",
+      "answer": "From 10 April 2026 in North America, Europe, Latin America and Oceania, OP07-115 I Re-Quasar Helllp!! and EB04-058 Borsalino cannot be played in the same deck. Each card remains legal on its own."
+    },
+    {
+      "question": "What is Weiss Schwarz?",
+      "answer": "Weiss Schwarz is a Bushiroad trading card game built around licensed anime and video-game properties. A deck contains 50 cards, including exactly 8 climax cards."
+    },
+    {
+      "question": "How many packs are in a Weiss Schwarz display?",
+      "answer": "English Weiss Schwarz displays commonly hold 12 packs of 8 cards, but the count varies by release and some sets use 9-card packs. Check the product page for the exact count."
+    },
+    {
+      "question": "What is a Weiss Schwarz trial deck?",
+      "answer": "A trial deck is a ready-to-play 50-card Weiss Schwarz deck. English trial decks commonly retail between $25 and $30, and two trial decks give you a legal game for two players."
+    },
+    {
+      "question": "Is One Piece TCG worth collecting?",
+      "answer": "The One Piece Card Game has both a competitive player base and a collector market, and short-printed manga alternate-art Secret Rares hold value. English displays contain 24 packs."
+    },
+    {
+      "question": "Is PSA, CGC or BGS better for grading Pokémon cards?",
+      "answer": "PSA slabs generally outsell CGC and BGS on identical cards, while CGC costs less per card and BGS includes subgrades. The better choice depends on the card's value and whether you are grading to sell or to keep."
+    },
+    {
+      "question": "How much does PSA grading cost?",
+      "answer": "In PSA's February 2026 update, the entry Value tier is $32.99 per card, with Value Plus at $49.99 and Value Max at $64.99. Cheaper tiers have opened and closed through the year."
+    },
+    {
+      "question": "How much does CGC grading cost?",
+      "answer": "CGC's published card tiers start at $17 per card for Bulk with a 25-card minimum, with Economy at $20, Standard at $55 and Express at $100. Members receive 10 to 20 percent off."
+    },
+    {
+      "question": "Which countries do you ship to?",
+      "answer": "PokéStore Direct ships to 40 or more countries worldwide, with tracking emailed as soon as your parcel leaves our facility."
+    },
+    {
+      "question": "Where do you ship from?",
+      "answer": "We dispatch from Los Angeles, California, in the United States."
+    },
+    {
+      "question": "How long until my order ships?",
+      "answer": "Orders leave our facility within one business day of confirmed payment. Delivery time then depends on your destination and the shipping service."
+    },
+    {
+      "question": "How is my order packed?",
+      "answer": "Orders ship in a rigid outer carton with void fill and corner protection, and the factory wrap never touches tape."
+    },
+    {
+      "question": "Can I cancel a pre-order?",
+      "answer": "Pre-orders can be cancelled before they are dispatched. Contact support with your order reference and we will confirm."
+    },
+    {
+      "question": "Do you offer wholesale or bulk pricing?",
+      "answer": "Yes. We offer wholesale and bulk pricing on sealed cases for shops, breakers and resellers. Tell us the products and quantities you need and we will confirm pricing and lead times."
+    },
+    {
+      "question": "What is inside the 30th Celebration set?",
+      "answer": "The 30th Celebration set shipped worldwide on 16 September 2026 with five all-foil cards per pack, 161 cards plus a 30-card Classic Collection, and a new Futuristic Rare tier. A Classic Collection card appears in roughly 1 in 10 packs."
+    }
+  ]
+}

@@ -1,67 +1,68 @@
 import type { MetadataRoute } from "next";
-import { catalog, brands, productTypes } from "@/lib/catalog";
+import { catalog, brands } from "@/lib/catalog";
 import { posts } from "@/data/posts";
 import { legalDocs } from "@/data/legal";
+import { siteUrl } from "@/lib/site-url";
 
-const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// Sitemap entries are rebuilt whenever the catalogue or posts change.
+export const revalidate = 3600;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticRoutes = [
-    "",
-    "/shop",
-    "/about",
-    "/services",
-    "/blog",
-    "/reviews",
-    "/contact",
-    "/support",
-    "/track-order",
-    "/shipping-delivery",
-    "/returns-refunds",
-    "/finance-disclosure",
-    "/talk-to-a-specialist",
-    "/wholesale",
-    "/legal",
-    "/legal/sitemap",
-  ].map((path) => ({
-    url: `${base}${path}`,
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { path: "", priority: 1, changeFrequency: "daily" },
+    { path: "/shop", priority: 0.9, changeFrequency: "daily" },
+    { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
+    { path: "/about", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/services", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/reviews", priority: 0.5, changeFrequency: "weekly" },
+    { path: "/contact", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/support", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/track-order", priority: 0.4, changeFrequency: "monthly" },
+    { path: "/shipping-delivery", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/returns-refunds", priority: 0.5, changeFrequency: "monthly" },
+    { path: "/wholesale", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/talk-to-a-specialist", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/finance-disclosure", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/legal", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/legal/sitemap", priority: 0.2, changeFrequency: "yearly" },
+  ].map((route) => ({
+    url: `${siteUrl}${route.path}`,
     lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : 0.7,
+    changeFrequency: route.changeFrequency as MetadataRoute.Sitemap[number]["changeFrequency"],
+    priority: route.priority,
   }));
 
-  const shopRoutes = [
-    ...brands.map((b) => `/shop/${b.slug}`),
-    ...productTypes.map((t) => `/shop?type=${t.slug}`),
-  ].map((path) => ({
-    url: `${base}${path}`,
+  const brandRoutes: MetadataRoute.Sitemap = brands.map((brand) => ({
+    url: `${siteUrl}/shop/${brand.slug}`,
     lastModified: now,
-    changeFrequency: "daily" as const,
-    priority: 0.8,
+    changeFrequency: "daily",
+    priority: 0.9,
   }));
 
-  const productRoutes = catalog.map((p) => ({
-    url: `${base}/shop/product/${p.slug}`,
-    lastModified: now,
-    changeFrequency: "daily" as const,
+  const productRoutes: MetadataRoute.Sitemap = catalog
+    .filter((product) => product.status === "published")
+    .map((product) => ({
+      url: `${siteUrl}/shop/product/${product.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
+
+  const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${siteUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  const postRoutes = posts.map((p) => ({
-    url: `${base}/blog/${p.slug}`,
-    lastModified: new Date(p.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
-
-  const legalRoutes = Object.keys(legalDocs).map((slug) => ({
-    url: `${base}/legal/${slug}`,
+  const legalRoutes: MetadataRoute.Sitemap = Object.keys(legalDocs).map((slug) => ({
+    url: `${siteUrl}/legal/${slug}`,
     lastModified: now,
-    changeFrequency: "yearly" as const,
-    priority: 0.3,
+    changeFrequency: "yearly",
+    priority: 0.2,
   }));
 
-  return [...staticRoutes, ...shopRoutes, ...productRoutes, ...postRoutes, ...legalRoutes];
+  return [...staticRoutes, ...brandRoutes, ...productRoutes, ...postRoutes, ...legalRoutes];
 }

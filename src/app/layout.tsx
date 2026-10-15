@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import { site } from "@/lib/site";
+import { DEFAULT_OG_IMAGE, OG_IMAGE_SIZE } from "@/lib/seo";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,13 +17,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${site.name} — Sealed Pokémon, One Piece & Weiss Schwarz Cards`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
+  category: "Shopping",
+  keywords: [
+    "sealed pokemon cards",
+    "pokemon booster box",
+    "elite trainer box",
+    "one piece card game booster box",
+    "weiss schwarz booster box",
+    "sealed trading cards",
+  ],
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  formatDetection: { email: false, address: false, telephone: false },
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -30,19 +45,41 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   openGraph: {
     type: "website",
     siteName: site.name,
+    locale: "en_US",
     title: `${site.name} — Sealed Pokémon, One Piece & Weiss Schwarz Cards`,
     description: site.description,
-    url: site.url,
-    images: [{ url: "/open-graph-thumbnail-image.png", width: 1200, height: 675, alt: site.name }],
+    url: siteUrl,
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: OG_IMAGE_SIZE.width,
+        height: OG_IMAGE_SIZE.height,
+        alt: `${site.name} — factory-sealed trading cards`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — Sealed Pokémon, One Piece & Weiss Schwarz Cards`,
     description: site.description,
-    images: ["/open-graph-thumbnail-image.png"],
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

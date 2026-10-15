@@ -5,7 +5,7 @@ const secret = new TextEncoder().encode(
   process.env.ADMIN_JWT_SECRET || process.env.NEXTAUTH_SECRET || "dev-admin-secret-change-me"
 );
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (!pathname.startsWith("/admin")) return NextResponse.next();

@@ -1,14 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { seoMetadata } from "@/lib/seo";
 import { BadgeCheck, MapPin, PackageCheck, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { getSiteSettings } from "@/lib/settings";
 
-export const metadata: Metadata = {
-  title: "About us",
-  description:
-    "PokéStore Direct sources factory-sealed Pokémon, One Piece, and Weiss Schwarz trading cards through official distribution and ships worldwide.",
-};
+export const metadata: Metadata = seoMetadata("/about");
 
 const standards = [
   {

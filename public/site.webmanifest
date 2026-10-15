@@ -1,6 +1,7 @@
 {
   "name": "PokéStore Direct",
   "short_name": "PokéStore Direct",
+  "description": "Factory-sealed Pokémon, One Piece and Weiss Schwarz trading cards, shipped worldwide.",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
+import { seoMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { legalDocs } from "@/data/legal";
 
-export const metadata: Metadata = {
-  title: "Legal",
-  description:
-    "Terms, privacy, cookies, accessibility, and disclaimer information for PokéStore Direct.",
-};
+export const metadata: Metadata = seoMetadata("/legal");
 
 export default function LegalIndexPage() {
   const docs = Object.values(legalDocs);

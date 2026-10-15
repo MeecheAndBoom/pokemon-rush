@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
+import { seoMetadata } from "@/lib/seo";
 import { CheckCircle2, FileText, PackageCheck, RotateCcw, XCircle } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { getSiteSettings } from "@/lib/settings";
 
-export const metadata: Metadata = {
-  title: "Returns & refunds",
-  description: "Our return policy for factory-sealed trading cards.",
-};
+export const metadata: Metadata = seoMetadata("/returns-refunds");
 
 const eligible = [
   "You received the wrong item or the wrong quantity.",

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { faqJsonLd, seoMetadata } from "@/lib/seo";
 import {
   BadgeCheck,
   Boxes,
@@ -17,6 +19,7 @@ import { SplitFeature } from "@/components/content/SplitFeature";
 import { HeroSlideshow } from "@/components/content/HeroSlideshow";
 import { DecorativeArt } from "@/components/content/DecorativeArt";
 import { FaqList } from "@/components/content/FaqList";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Stars } from "@/components/content/Stars";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import {
@@ -92,6 +95,8 @@ const trustedResources = [
   { label: "CGC Cards", href: "https://www.cgccards.com/" },
 ];
 
+export const metadata: Metadata = seoMetadata("/");
+
 export default async function HomePage() {
   const settings = await getSiteSettings();
   const featured = getFeatured(8);
@@ -104,6 +109,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <JsonLd data={faqJsonLd(supportFaqs.slice(0, 6))} />
       {/* 1. Hero */}
       <section className="relative isolate overflow-hidden border-b border-[var(--hairline)] pt-16 pb-16 sm:pt-24 sm:pb-24">
         <HeroSlideshow slides={heroSlides} className="absolute inset-0 -z-10" />

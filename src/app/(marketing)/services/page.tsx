@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { seoMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   Archive,
@@ -11,11 +12,7 @@ import {
 import { Container } from "@/components/layout/Container";
 import { getSiteSettings } from "@/lib/settings";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Sealed product sourcing, pre-orders, wholesale, inspection, and storage guidance from PokéStore Direct.",
-};
+export const metadata: Metadata = seoMetadata("/services");
 
 const services = [
   {

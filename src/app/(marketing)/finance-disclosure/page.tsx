@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
+import { seoMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { CreditCard, Globe, Landmark, ShieldCheck, Wallet } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { getSiteSettings } from "@/lib/settings";
 
-export const metadata: Metadata = {
-  title: "Finance disclosure",
-  description:
-    "How payment works at PokéStore Direct, and what we do and do not offer in terms of credit and finance.",
-};
+export const metadata: Metadata = seoMetadata("/finance-disclosure");
 
 const atAGlance = [
   {

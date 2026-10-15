@@ -8,7 +8,6 @@ export type SiteSettings = {
   name: string;
   description: string;
   email: string;
-  salesEmail: string;
   hours: string;
   phone: string;
   phoneHref: string;
@@ -43,7 +42,6 @@ function fallback(): SiteSettings {
     name: site.name,
     description: site.description,
     email: site.email,
-    salesEmail: site.salesEmail,
     hours: site.hours,
     phone: site.phone,
     phoneHref: telHref(site.phone),
@@ -84,7 +82,6 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
       name: site.name,
       description: site.description,
       email: site.email,
-      salesEmail: site.salesEmail,
       hours: site.hours,
       phone,
       phoneHref: telHref(phone),

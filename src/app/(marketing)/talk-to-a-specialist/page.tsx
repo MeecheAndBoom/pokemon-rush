@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
 import { BadgeCheck, Boxes, PackageSearch, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/layout/Container";
+import { seoMetadata } from "@/lib/seo";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { getSiteSettings } from "@/lib/settings";
 
-export const metadata: Metadata = {
-  title: "Talk to a specialist",
-  description:
-    "Speak with someone who knows sealed trading cards. Ask about specific sets, cases, pre-orders, or sourcing.",
-};
+export const metadata: Metadata = seoMetadata("/talk-to-a-specialist");
 
 const help = [
   {
@@ -47,8 +44,8 @@ export default async function SpecialistPage() {
             <a href={settings.phoneHref} className="text-[var(--accent)] hover:opacity-70">
               {settings.phone}
             </a>
-            <a href={`mailto:${settings.salesEmail}`} className="text-[var(--accent)] hover:opacity-70">
-              {settings.salesEmail}
+            <a href={`mailto:${settings.email}`} className="text-[var(--accent)] hover:opacity-70">
+              {settings.email}
             </a>
           </div>
         </div>

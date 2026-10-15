@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
+import { seoMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { brands, catalog, languages, productTypes } from "@/lib/catalog";
 import { footerNav } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Sitemap",
-  description: "Every page on the PokéStore Direct website in one place.",
-};
+export const metadata: Metadata = seoMetadata("/legal/sitemap");
 
 export default function SitemapPage() {
   // The footer navigation already carries Shop, Company, Help, and Legal groups.

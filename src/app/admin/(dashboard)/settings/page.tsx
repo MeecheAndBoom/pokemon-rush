@@ -289,7 +289,7 @@ export default async function AdminSettingsPage({
           <Status ok={Boolean(process.env.ADMIN_JWT_SECRET)} label="Admin session secret" />
         </ul>
         <p className="mt-3 text-[12px] text-[var(--ink-2)]">
-          Public support address: {site.email} · Sales: {site.salesEmail}
+          Public support address: {site.email}
         </p>
       </section>
     </div>

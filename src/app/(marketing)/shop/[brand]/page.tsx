@@ -6,9 +6,12 @@ import { ProductGrid } from "@/components/commerce/ProductGrid";
 import { Pagination } from "@/components/commerce/Pagination";
 import { SearchBox } from "@/components/layout/SearchBox";
 import { DecorativeArt } from "@/components/content/DecorativeArt";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { brands, getByBrand, languages, productTypes } from "@/lib/catalog";
 import { media } from "@/lib/media";
 import { cn } from "@/lib/utils";
+import { breadcrumbJsonLd, itemListJsonLdForProducts, pageMetadata } from "@/lib/seo";
+import { brandSeo } from "@/data/seo";
 
 type Params = Promise<{ brand: string }>;
 type SearchParams = Promise<{
@@ -27,12 +30,17 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { brand } = await params;
-  const b = brands.find((x) => x.slug === brand);
-  if (!b) return { title: "Not found" };
-  return {
-    title: `${b.label} cards`,
-    description: `${b.blurb} Browse sealed ${b.label} products at PokéStore Direct.`,
-  };
+  const entry = brandSeo[brand];
+  const meta = brands.find((x) => x.slug === brand);
+  if (!entry || !meta) return { title: "Brand not found", robots: { index: false } };
+  return pageMetadata({
+    title: entry.title,
+    description: entry.description,
+    path: `/shop/${brand}`,
+    keywords: entry.keywords,
+    // The colocated opengraph-image.tsx supplies the social image.
+    image: null,
+  });
 }
 
 export default async function BrandPage({
@@ -108,8 +116,22 @@ export default async function BrandPage({
         : "border-[var(--hairline)] text-[var(--ink-2)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
     );
 
+  const crumbs = [
+    { name: "Home", path: "/" },
+    { name: "Shop", path: "/shop" },
+    { name: meta.label, path: `/shop/${brand}` },
+  ];
+
   return (
     <div className="pb-16">
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
+      <JsonLd
+        data={itemListJsonLdForProducts(
+          `${meta.label} — sealed trading cards`,
+          items,
+          `/shop/${brand}`
+        )}
+      />
       <section
         className={cn(
           "relative overflow-hidden border-b border-[var(--hairline)] bg-gradient-to-b to-[var(--background)] py-12 sm:py-16",

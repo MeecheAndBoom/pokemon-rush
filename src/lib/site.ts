@@ -17,7 +17,6 @@ export const site = {
   url: "https://pokemon-rush-sigma.vercel.app",
   phone: "(213) 300-5923",
   email: "support@pokestoredirect.com",
-  salesEmail: "sales@pokestoredirect.com",
   hours: "Monday to Friday, 9am – 6pm (PT)",
   address: {
     line1: "",
