@@ -132,7 +132,7 @@ export function TrackOrderClient({ phone, hours }: { phone: string; hours: strin
               id="orderNumber"
               name="orderNumber"
               required
-              placeholder="PR-2026-123456"
+              placeholder="PSD-2026-123456"
               autoComplete="off"
               className={inputClass}
             />

@@ -45,8 +45,9 @@ export const media = {
   },
 };
 
-// Background slideshow for the home hero. Replace these with the final series
-// of images when they are ready — the component handles any number of slides.
+// Slideshow slides kept for the final home-hero image series the client is
+// still preparing. The hero currently shows the Open Graph card instead
+// (see DEFAULT_OG_IMAGE in src/lib/brand.ts).
 export const heroSlides = [
   { src: media.section.store, alt: "PokéStore Direct shelves stocked with sealed trading card product" },
   { src: media.section["one-piece"], alt: "Sealed One Piece Card Game product" },

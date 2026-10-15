@@ -16,14 +16,14 @@ import {
 import { Container } from "@/components/layout/Container";
 import { ProductGrid } from "@/components/commerce/ProductGrid";
 import { SplitFeature } from "@/components/content/SplitFeature";
-import { HeroSlideshow } from "@/components/content/HeroSlideshow";
 import { DecorativeArt } from "@/components/content/DecorativeArt";
 import { FaqList } from "@/components/content/FaqList";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Stars } from "@/components/content/Stars";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { getBrandCounts, getByBrand, getFeatured, publishedProducts } from "@/lib/catalog";
-import { media, guideCover, heroSlides } from "@/lib/media";
+import { media, guideCover } from "@/lib/media";
+import { DEFAULT_OG_IMAGE } from "@/lib/brand";
 import { reviewSummary, reviews } from "@/data/reviews";
 import { posts } from "@/data/posts";
 import { supportFaqs } from "@/data/faq";
@@ -108,29 +108,43 @@ export default async function HomePage() {
     <>
       <JsonLd data={faqJsonLd(supportFaqs.slice(0, 6))} />
       {/* 1. Hero */}
-      <section className="relative isolate overflow-hidden border-b border-[var(--hairline)] pt-16 pb-16 sm:pt-24 sm:pb-24">
-        <HeroSlideshow slides={heroSlides} className="absolute inset-0 -z-10" />
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-white via-white/90 to-white/40" />
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-white/60 via-transparent to-[var(--background)]" />
+      <section className="relative isolate overflow-hidden border-b border-[var(--hairline)] pt-14 pb-14 sm:pt-20 sm:pb-20">
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-[var(--tint-yellow)] via-[var(--background)] to-[var(--background)]"
+          aria-hidden="true"
+        />
         <Container className="relative">
-          <div className="max-w-2xl">
-            <h1 className="text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] sm:text-[58px]">
-              Trading cards, sealed and ready to ship.
-            </h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-[var(--ink-2)] sm:text-[19px]">
-              Factory-sealed Pokémon, One Piece, and Weiss Schwarz. Checked before dispatch and
-              packed to arrive exactly as it left — across Japan, North America, Europe, and beyond.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-[17px]">
-              <Link href="/shop" className="text-[var(--accent)] transition-opacity hover:opacity-70">
-                Shop all cards
-              </Link>
-              <Link
-                href="/talk-to-a-specialist"
-                className="text-[var(--accent)] transition-opacity hover:opacity-70"
-              >
-                Talk to a specialist
-              </Link>
+          <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_1fr] lg:gap-16">
+            <div className="max-w-xl">
+              <h1 className="text-[38px] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-[50px] lg:text-[54px]">
+                Trading cards, sealed and ready to ship.
+              </h1>
+              <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-[var(--ink-2)] sm:text-[19px]">
+                Factory-sealed Pokémon, One Piece, and Weiss Schwarz. Checked before dispatch and
+                packed to arrive exactly as it left — across Japan, North America, Europe, and beyond.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-[17px]">
+                <Link href="/shop" className="text-[var(--accent)] transition-opacity hover:opacity-70">
+                  Shop all cards
+                </Link>
+                <Link
+                  href="/talk-to-a-specialist"
+                  className="text-[var(--accent)] transition-opacity hover:opacity-70"
+                >
+                  Talk to a specialist
+                </Link>
+              </div>
+            </div>
+            <div className="relative">
+              <Image
+                src={DEFAULT_OG_IMAGE}
+                alt="PokéStore Direct — factory-sealed Pokémon, One Piece and Weiss Schwarz trading cards"
+                width={1200}
+                height={675}
+                priority
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="h-auto w-full rounded-3xl border border-[var(--hairline)] shadow-[0_40px_80px_-30px_rgba(15,23,42,0.4)]"
+              />
             </div>
           </div>
         </Container>
