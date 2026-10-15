@@ -54,7 +54,9 @@ export function Header({
 
           <nav className="hidden items-center gap-9 md:flex" aria-label="Primary">
             {mainNav.map((item) => {
-              const active = pathname.startsWith(item.href);
+              // "/" would match every path with startsWith, so home is exact.
+              const active =
+                item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
               return (
                 <Link
                   key={item.href}
@@ -74,7 +76,11 @@ export function Header({
 
           <div className="flex items-center gap-1.5">
             <div className="hidden w-56 lg:block">
-              <SearchBox placeholder="Search" className="[&_input]:h-9" />
+              <SearchBox
+                placeholder="Search"
+                className="[&_input]:h-9"
+                panelClassName="right-0 top-[calc(100%+0.5rem)] w-[min(24rem,calc(100vw-2rem))]"
+              />
             </div>
 
             <button

@@ -56,12 +56,14 @@ export default function ShopPage() {
           products: all,
         })}
       />
-      <section className="relative overflow-hidden border-b border-[var(--hairline)] bg-gradient-to-b from-[var(--tint-blue)] to-[var(--background)]">
-        <DecorativeArt
-          src={media.art.goku}
-          opacity={0.13}
-          className="-right-8 -top-6 w-[170px] sm:-right-12 sm:w-[250px] lg:w-[330px]"
-        />
+      <section className="relative border-b border-[var(--hairline)] bg-gradient-to-b from-[var(--tint-blue)] to-[var(--background)]">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <DecorativeArt
+            src={media.art.goku}
+            opacity={0.13}
+            className="-right-8 -top-6 w-[170px] sm:-right-12 sm:w-[250px] lg:w-[330px]"
+          />
+        </div>
         <Container className="relative pt-12 pb-10 sm:pt-16">
           <h1 className="text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">Shop</h1>
           <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[var(--ink-2)]">

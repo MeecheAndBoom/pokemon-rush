@@ -98,24 +98,26 @@ export default async function BrandPage({ params }: { params: Params }) {
       />
       <section
         className={cn(
-          "relative overflow-hidden border-b border-[var(--hairline)] bg-gradient-to-b to-[var(--background)] py-12 sm:py-16",
+          "relative border-b border-[var(--hairline)] bg-gradient-to-b to-[var(--background)] py-12 sm:py-16",
           heroTint
         )}
       >
-        {heroArt ? (
-          <DecorativeArt
-            src={heroArt}
-            opacity={0.13}
-            className="-right-8 -top-4 w-[170px] sm:-right-12 sm:w-[250px] lg:w-[330px]"
-          />
-        ) : null}
-        {heroArtSecondary ? (
-          <DecorativeArt
-            src={heroArtSecondary}
-            opacity={0.08}
-            className="-left-8 -bottom-8 w-[150px] sm:-left-14 sm:w-[210px] lg:w-[290px]"
-          />
-        ) : null}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          {heroArt ? (
+            <DecorativeArt
+              src={heroArt}
+              opacity={0.13}
+              className="-right-8 -top-4 w-[170px] sm:-right-12 sm:w-[250px] lg:w-[330px]"
+            />
+          ) : null}
+          {heroArtSecondary ? (
+            <DecorativeArt
+              src={heroArtSecondary}
+              opacity={0.08}
+              className="-left-8 -bottom-8 w-[150px] sm:-left-14 sm:w-[210px] lg:w-[290px]"
+            />
+          ) : null}
+        </div>
         <Container className="relative">
           <p className="text-[13px] text-[var(--ink-2)]">
             <Link href="/shop" className="hover:text-[var(--foreground)]">

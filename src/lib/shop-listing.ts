@@ -1,4 +1,5 @@
 import type { CatalogCard } from "@/lib/product-meta";
+import { matchesQuery } from "@/lib/search";
 
 /**
  * Shared shape of the shop listing. `buildListingView` is pure and importable
@@ -92,12 +93,11 @@ export function buildListingView(input: ListingInput): ListingView {
     sort: query.sort,
   };
 
-  const needle = q.trim().toLowerCase();
   const matched = products.filter((product) => {
     if (brand && product.brand !== brand) return false;
     if (language && product.language !== language) return false;
     if (type && product.productType !== type) return false;
-    if (needle && !product.search.includes(needle)) return false;
+    if (q && !matchesQuery(product.search, q)) return false;
     return true;
   });
 

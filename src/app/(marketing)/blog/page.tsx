@@ -161,7 +161,9 @@ export default function BlogPage() {
       <section className="mt-16">
         <Container>
           <div className="rounded-3xl border border-[var(--hairline)] p-8 sm:p-12">
-            <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+            {/* `grid-cols-1` keeps the track at `minmax(0,1fr)` so the email
+                input's intrinsic width can't blow the column out past the card. */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
               <div>
                 <h2 className="text-[24px] font-semibold tracking-[-0.02em] sm:text-[30px]">
                   Get the next guide
