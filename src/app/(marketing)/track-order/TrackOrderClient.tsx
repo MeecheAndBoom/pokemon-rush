@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Headphones, MapPin, PackageCheck, Truck } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-import { formatPrice } from "@/lib/catalog";
+import { formatPrice } from "@/lib/product-meta";
 import { media } from "@/lib/media";
 
 type TrackItem = {

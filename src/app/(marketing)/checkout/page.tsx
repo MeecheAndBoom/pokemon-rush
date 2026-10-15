@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Container } from "@/components/layout/Container";
-import { formatPrice } from "@/lib/catalog";
+import { formatPrice } from "@/lib/product-meta";
 import { cartSubtotal, clearCart, onCartChange, readCart, type CartLine } from "@/lib/cart-store";
 
 type Method = {

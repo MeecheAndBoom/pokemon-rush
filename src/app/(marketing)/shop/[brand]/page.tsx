@@ -1,30 +1,28 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
-import { ProductGrid } from "@/components/commerce/ProductGrid";
-import { Pagination } from "@/components/commerce/Pagination";
+import { CatalogListing } from "@/components/commerce/CatalogListing";
+import { ShopBrowser } from "@/components/commerce/ShopBrowser";
+import { ShopSearch } from "@/components/commerce/ShopSearch";
 import { SearchBox } from "@/components/layout/SearchBox";
 import { DecorativeArt } from "@/components/content/DecorativeArt";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { brands, getByBrand, languages, productTypes } from "@/lib/catalog";
+import { brands, catalogCards, getByBrand, languages, productTypes } from "@/lib/catalog";
 import { media } from "@/lib/media";
 import { cn } from "@/lib/utils";
+import { buildListingView, type SortOption } from "@/lib/shop-listing";
 import { breadcrumbJsonLd, itemListJsonLdForProducts, pageMetadata } from "@/lib/seo";
 import { brandSeo } from "@/data/seo";
 
 type Params = Promise<{ brand: string }>;
-type SearchParams = Promise<{
-  language?: string;
-  type?: string;
-  sort?: string;
-  q?: string;
-  page?: string;
-}>;
 
-const PAGE_SIZE = 24;
+// Filtering happens in the browser (see ShopBrowser), so each brand page is
+// prerendered from generateStaticParams.
+const BRAND_SORTS: readonly SortOption[] = [{ value: "price-asc", label: "Price: low to high" }];
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return brands.map((b) => ({ brand: b.slug }));
 }
 
@@ -43,15 +41,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   });
 }
 
-export default async function BrandPage({
-  params,
-  searchParams,
-}: {
-  params: Params;
-  searchParams: SearchParams;
-}) {
+export default async function BrandPage({ params }: { params: Params }) {
   const { brand } = await params;
-  const sp = await searchParams;
   const meta = brands.find((b) => b.slug === brand);
   if (!meta) notFound();
 
@@ -77,44 +68,17 @@ export default async function BrandPage({
   const heroArtSecondary = brandArtSecondary[brand];
   const heroTint = brandTint[brand] ?? "from-[var(--tint-blue)]";
 
-  let all = getByBrand(brand);
-  if (sp.language) all = all.filter((p) => p.language === sp.language);
-  if (sp.type) all = all.filter((p) => p.productType === sp.type);
-  if (sp.q) {
-    const q = sp.q.toLowerCase();
-    all = all.filter(
-      (p) => p.name.toLowerCase().includes(q) || p.tags.join(" ").toLowerCase().includes(q)
-    );
-  }
-
-  if (sp.sort === "price-asc") all = [...all].sort((a, b) => a.price - b.price);
-  if (sp.sort === "price-desc") all = [...all].sort((a, b) => b.price - a.price);
-  if (sp.sort === "name-asc") all = [...all].sort((a, b) => a.name.localeCompare(b.name));
-
-  const parsedPage = Number.parseInt(sp.page ?? "1", 10);
-  const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
-  const current = Math.min(Math.max(Number.isNaN(parsedPage) ? 1 : parsedPage, 1), totalPages);
-  const start = (current - 1) * PAGE_SIZE;
-  const items = all.slice(start, start + PAGE_SIZE);
-
-  const base: Record<string, string | undefined> = { ...sp, page: undefined };
-  const href = (patch: Record<string, string | undefined>) => {
-    const merged = { ...base, ...patch };
-    const p = new URLSearchParams();
-    Object.entries(merged).forEach(([k, v]) => {
-      if (v) p.set(k, v as string);
-    });
-    const qs = p.toString();
-    return qs ? `/shop/${brand}?${qs}` : `/shop/${brand}`;
-  };
-
-  const chip = (active: boolean) =>
-    cn(
-      "rounded-full border px-4 py-1.5 text-[13px] transition-colors",
-      active
-        ? "border-[var(--foreground)] bg-[var(--foreground)] text-[var(--background)]"
-        : "border-[var(--hairline)] text-[var(--ink-2)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
-    );
+  const all = getByBrand(brand);
+  const products = catalogCards(all);
+  const basePath = `/shop/${brand}`;
+  const view = buildListingView({
+    products,
+    query: {},
+    basePath,
+    languages,
+    productTypes,
+    sorts: BRAND_SORTS,
+  });
 
   const crumbs = [
     { name: "Home", path: "/" },
@@ -128,7 +92,7 @@ export default async function BrandPage({
       <JsonLd
         data={itemListJsonLdForProducts(
           `${meta.label} — sealed trading cards`,
-          items,
+          all,
           `/shop/${brand}`
         )}
       />
@@ -166,64 +130,23 @@ export default async function BrandPage({
           </p>
 
           <div className="mt-8 max-w-md">
-            <SearchBox
-              defaultValue={sp.q ?? ""}
-              placeholder={`Search ${meta.label}`}
-            />
+            <Suspense fallback={<SearchBox placeholder={`Search ${meta.label}`} />}>
+              <ShopSearch placeholder={`Search ${meta.label}`} />
+            </Suspense>
           </div>
         </Container>
       </section>
 
       <Container>
-        <div className="mt-10 flex flex-wrap items-center gap-2">
-          {languages.map((l) => (
-            <Link
-              key={l.slug}
-              href={href({ language: sp.language === l.slug ? undefined : l.slug })}
-              className={chip(sp.language === l.slug)}
-            >
-              {l.label}
-            </Link>
-          ))}
-          {productTypes.map((t) => (
-            <Link
-              key={t.slug}
-              href={href({ type: sp.type === t.slug ? undefined : t.slug })}
-              className={chip(sp.type === t.slug)}
-            >
-              {t.label}
-            </Link>
-          ))}
-          <Link
-            href={href({ sort: sp.sort === "price-asc" ? undefined : "price-asc" })}
-            className={chip(sp.sort === "price-asc")}
-          >
-            Price: low to high
-          </Link>
-        </div>
-
-        <div className="mt-10 flex items-baseline justify-between gap-4 border-b border-[var(--hairline)] pb-4">
-          <p className="text-[13px] text-[var(--ink-2)]">
-            Showing {all.length === 0 ? 0 : start + 1}–{Math.min(start + PAGE_SIZE, all.length)} of{" "}
-            {all.length}
-          </p>
-          {totalPages > 1 ? (
-            <p className="text-[13px] text-[var(--ink-2)]">
-              Page {current} of {totalPages}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="mt-10">
-          <ProductGrid products={items} />
-        </div>
-
-        <Pagination
-          current={current}
-          total={totalPages}
-          hrefForPage={(page) => href({ page: page === 1 ? undefined : String(page) })}
-          className="mt-16"
-        />
+        <Suspense fallback={<CatalogListing view={view} />}>
+          <ShopBrowser
+            products={products}
+            basePath={basePath}
+            languages={languages}
+            productTypes={productTypes}
+            sorts={BRAND_SORTS}
+          />
+        </Suspense>
       </Container>
     </div>
   );

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/layout/Container";
-import { formatPrice } from "@/lib/catalog";
+import { formatPrice } from "@/lib/product-meta";
 import {
   cartSubtotal,
   onCartChange,

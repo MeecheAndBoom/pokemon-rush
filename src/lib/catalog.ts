@@ -1,6 +1,11 @@
 import catalogJson from "@/data/catalog.json";
+import type { CatalogCard, ProductImage } from "@/lib/product-meta";
 
-export type ProductImage = { url: string; alt: string };
+// Re-exported so server code can keep importing these from the catalogue while
+// client components import them straight from `@/lib/product-meta` (which does
+// not drag the catalogue JSON into the browser bundle).
+export { formatPrice, languageLabels, brandLabels, productTypeLabels } from "@/lib/product-meta";
+export type { ProductImage, ProductCardData, CatalogCard } from "@/lib/product-meta";
 
 export type CatalogProduct = {
   slug: string;
@@ -62,42 +67,6 @@ export const languages = [
   { slug: "korean", label: "Korean" },
 ] as const;
 
-export const languageLabels: Record<string, string> = {
-  english: "English",
-  japanese: "Japanese",
-  chinese: "Chinese",
-  korean: "Korean",
-  "n/a": "N/A",
-};
-
-export const brandLabels: Record<string, string> = {
-  pokemon: "Pokémon",
-  "one-piece": "One Piece",
-  "weiss-schwarz": "Weiss Schwarz",
-  accessories: "Accessories",
-};
-
-export const productTypeLabels: Record<string, string> = {
-  "booster-box": "Booster box",
-  "booster-bundle": "Booster bundle",
-  "elite-trainer-box": "Elite Trainer Box",
-  "sealed-case": "Sealed case",
-  "booster-pack": "Booster pack",
-  collection: "Premium collection",
-  "trial-deck": "Trial deck",
-  "single-card": "Single card",
-  "graded-card": "Graded card",
-  accessory: "Accessory",
-};
-
-export function formatPrice(cents: number, currency = "USD") {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-    minimumFractionDigits: cents % 100 === 0 ? 0 : 2,
-  }).format(cents / 100);
-}
-
 export function getProduct(slug: string) {
   return catalog.find((p) => p.slug === slug);
 }
@@ -113,44 +82,33 @@ export function getByBrand(brand: string) {
   return catalog.filter((p) => p.brand === brand && p.status === "published");
 }
 
-export type ShopFilters = {
-  brand?: string;
-  language?: string;
-  type?: string;
-  q?: string;
-  sort?: string;
-};
+/** Every published product, in catalogue order. */
+export function publishedProducts() {
+  return catalog.filter((p) => p.status === "published");
+}
 
-export function filterProducts(filters: ShopFilters) {
-  let items = catalog.filter((p) => p.status === "published");
+/** Trim a catalogue product to the fields a client-side listing filters on. */
+export function toCatalogCard(product: CatalogProduct): CatalogCard {
+  return {
+    slug: product.slug,
+    name: product.name,
+    brand: product.brand,
+    language: product.language,
+    productType: product.productType,
+    price: product.price,
+    compareAtPrice: product.compareAtPrice,
+    currency: product.currency,
+    preorder: product.preorder,
+    images: product.images.slice(0, 1),
+    search: [product.name, product.setName, ...product.tags]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase(),
+  };
+}
 
-  if (filters.brand) items = items.filter((p) => p.brand === filters.brand);
-  if (filters.language) items = items.filter((p) => p.language === filters.language);
-  if (filters.type) items = items.filter((p) => p.productType === filters.type);
-  if (filters.q) {
-    const q = filters.q.toLowerCase();
-    items = items.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.tags.join(" ").toLowerCase().includes(q)
-    );
-  }
-
-  switch (filters.sort) {
-    case "price-asc":
-      items = [...items].sort((a, b) => a.price - b.price);
-      break;
-    case "price-desc":
-      items = [...items].sort((a, b) => b.price - a.price);
-      break;
-    case "name-asc":
-      items = [...items].sort((a, b) => a.name.localeCompare(b.name));
-      break;
-    default:
-      break;
-  }
-
-  return items;
+export function catalogCards(products: readonly CatalogProduct[]): CatalogCard[] {
+  return products.map(toCatalogCard);
 }
 
 export function getBrandCounts() {

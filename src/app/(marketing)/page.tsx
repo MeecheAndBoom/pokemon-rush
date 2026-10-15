@@ -22,12 +22,7 @@ import { FaqList } from "@/components/content/FaqList";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Stars } from "@/components/content/Stars";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
-import {
-  filterProducts,
-  getBrandCounts,
-  getByBrand,
-  getFeatured,
-} from "@/lib/catalog";
+import { getBrandCounts, getByBrand, getFeatured, publishedProducts } from "@/lib/catalog";
 import { media, guideCover, heroSlides } from "@/lib/media";
 import { reviewSummary, reviews } from "@/data/reviews";
 import { posts } from "@/data/posts";
@@ -102,7 +97,9 @@ export default async function HomePage() {
   const featured = getFeatured(8);
   const brandCounts = getBrandCounts();
   const activeBrands = brandCounts.filter((brand) => brand.count > 0);
-  const japanese = filterProducts({ language: "japanese" }).slice(0, 8);
+  const japanese = publishedProducts()
+    .filter((product) => product.language === "japanese")
+    .slice(0, 8);
   const onePiece = getByBrand("one-piece").slice(0, 8);
   const weiss = getByBrand("weiss-schwarz").slice(0, 4);
   const latestGuides = posts.slice(0, 3);

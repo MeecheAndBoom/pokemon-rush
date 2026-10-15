@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatPrice, languageLabels, type CatalogProduct } from "@/lib/catalog";
+import { formatPrice, languageLabels, type ProductCardData } from "@/lib/product-meta";
 
-export function ProductCard({ product }: { product: CatalogProduct }) {
+export function ProductCard({ product }: { product: ProductCardData }) {
   const image = product.images[0];
   const discount =
     product.compareAtPrice && product.compareAtPrice > product.price

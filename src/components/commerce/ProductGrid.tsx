@@ -1,7 +1,7 @@
 import { ProductCard } from "@/components/commerce/ProductCard";
-import type { CatalogProduct } from "@/lib/catalog";
+import type { ProductCardData } from "@/lib/product-meta";
 
-export function ProductGrid({ products }: { products: CatalogProduct[] }) {
+export function ProductGrid({ products }: { products: readonly ProductCardData[] }) {
   if (products.length === 0) {
     return (
       <p className="py-16 text-center text-[15px] text-[var(--ink-2)]">
