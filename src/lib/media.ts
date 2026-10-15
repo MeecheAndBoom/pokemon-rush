@@ -49,7 +49,6 @@ export const media = {
 // of images when they are ready — the component handles any number of slides.
 export const heroSlides = [
   { src: media.section.store, alt: "Pokemon Rush shelves stocked with sealed trading card product" },
-  { src: media.section.pokemon, alt: "Sealed Japanese Pokémon booster boxes" },
   { src: media.section["one-piece"], alt: "Sealed One Piece Card Game product" },
   { src: media.section["weiss-schwarz"], alt: "Sealed Weiss Schwarz product" },
   { src: media.section.shipping, alt: "Sealed orders being packed for dispatch" },

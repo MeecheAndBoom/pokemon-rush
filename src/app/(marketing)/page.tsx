@@ -348,7 +348,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link
-              href="/shop/pokemon/japanese"
+              href="/shop/pokemon?language=japanese"
               className="text-[15px] text-[var(--accent)] hover:opacity-70"
             >
               All Japanese cards
