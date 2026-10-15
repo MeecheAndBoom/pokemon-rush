@@ -13,8 +13,6 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "pokegradeonecards.com" },
-      { protocol: "https", hostname: "**.pokegradeonecards.com" },
       { protocol: "https", hostname: "res.cloudinary.com" },
       { protocol: "https", hostname: "images.unsplash.com" },
     ],

@@ -503,6 +503,26 @@ const catalog = raw.map((p) => {
   }
 }
 
+// Mirror any image we have already uploaded to Cloudinary so a rebuild never
+// reintroduces direct links to the source host. The map is produced by
+// scripts/migrate-images-to-cloudinary.mjs.
+{
+  const mapPath = path.join(root, "data", "cloudinary-images.json");
+  if (fs.existsSync(mapPath)) {
+    const urlMap = JSON.parse(fs.readFileSync(mapPath, "utf8"));
+    let rewritten = 0;
+    for (const p of catalog) {
+      for (const img of p.images) {
+        if (urlMap[img.url]) {
+          img.url = urlMap[img.url];
+          rewritten += 1;
+        }
+      }
+    }
+    if (rewritten) console.log(`Cloudinary map applied to ${rewritten} image URLs.`);
+  }
+}
+
 fs.writeFileSync(out, JSON.stringify(catalog, null, 2));
 fs.mkdirSync(path.dirname(appOut), { recursive: true });
 fs.writeFileSync(appOut, JSON.stringify(catalog, null, 2));
