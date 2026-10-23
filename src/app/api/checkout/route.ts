@@ -24,7 +24,7 @@ const lineSchema = z.object({
 const schema = z.object({
   email: z.string().email(),
   name: z.string().min(1),
-  phone: z.string().optional(),
+  phone: z.string().trim().min(1, "Phone number is required"),
   paymentMethod: z.string(),
   lines: z.array(lineSchema).min(1),
   shippingAddress: z.record(z.string(), z.string()).optional(),
@@ -37,7 +37,10 @@ export async function POST(req: Request) {
     const body = await req.json();
     const parsed = schema.safeParse(body);
     if (!parsed.success) {
-      return NextResponse.json({ error: "Invalid checkout payload" }, { status: 400 });
+      return NextResponse.json(
+        { error: parsed.error.issues[0]?.message || "Invalid checkout payload" },
+        { status: 400 }
+      );
     }
 
     await connectDB();
@@ -93,6 +96,7 @@ export async function POST(req: Request) {
     const emailData = {
       orderNumber: doc.orderNumber,
       email: doc.email,
+      phone: doc.phone,
       name: input.name,
       items: doc.items.map((i) => ({
         name: i.name,

@@ -159,12 +159,15 @@ export default function CheckoutPage() {
               </div>
               <div className="sm:max-w-[calc(50%-0.625rem)]">
                 <label htmlFor="phone" className={labelClass}>
-                  Phone (optional)
+                  Phone
                 </label>
                 <input
                   id="phone"
                   name="phone"
+                  type="tel"
+                  required
                   autoComplete="tel"
+                  inputMode="tel"
                   className={inputClass}
                 />
               </div>

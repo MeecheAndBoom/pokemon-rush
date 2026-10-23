@@ -8,6 +8,7 @@ export type OrderEmailData = {
   orderNumber: string;
   email: string;
   name: string;
+  phone: string;
   items: { name: string; quantity: number; lineTotal: number }[];
   subtotal: number;
   total: number;
@@ -51,6 +52,8 @@ export function orderConfirmation(data: OrderEmailData) {
      <p style="font-size:14px;color:#6e6e73;margin:0 0 8px;">${data.paymentLabel}</p>
      <div style="font-size:14px;color:#6e6e73;line-height:1.6;white-space:pre-line;">${data.paymentInstructions}</div>
      ${addressBlock(data.shippingAddress)}
+     <p style="font-size:14px;margin:24px 0 4px;"><strong>Contact</strong></p>
+     <p style="font-size:14px;color:#6e6e73;margin:0 0 24px;">${data.email} · ${data.phone}</p>
      <p style="font-size:13px;color:#6e6e73;margin:24px 0 0;">
        Questions? Reply to this email or call ${site.phone}.
      </p>`
@@ -68,7 +71,8 @@ export function adminOrderNotification(data: OrderEmailData) {
 
   return shell(
     `New order ${data.orderNumber}`,
-    `<p style="font-size:14px;color:#6e6e73;margin:0 0 16px;">${data.name} · ${data.email}</p>
+    `<p style="font-size:14px;color:#6e6e73;margin:0 0 16px;">${data.name} · ${data.email}
+      <br />Phone: ${data.phone}</p>
      <table style="width:100%;border-collapse:collapse;">${rows}
      <tr><td style="padding:10px 0;font-weight:600;">Total</td>
      <td style="padding:10px 0;font-weight:600;text-align:right;">${formatPrice(data.total, data.currency)}</td></tr></table>

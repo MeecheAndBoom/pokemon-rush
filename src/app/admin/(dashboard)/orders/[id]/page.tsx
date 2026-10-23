@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { connectDB } from "@/lib/db";
 import { Order } from "@/lib/models/Order";
 import { formatPrice } from "@/lib/catalog";
+import { telHref } from "@/lib/settings";
 import {
   updateFulfillmentAction as updateOrderFulfillmentAction,
   updateOrderStatusAction,
@@ -61,7 +62,14 @@ export default async function AdminOrderDetailPage({
       </div>
       <p className="mt-2 text-[14px] text-[var(--ink-2)]">
         {order.email}
-        {order.phone ? ` · ${order.phone}` : ""}
+        {order.phone ? (
+          <>
+            {" · "}
+            <a href={telHref(order.phone)} className="text-[var(--accent)] hover:opacity-70">
+              {order.phone}
+            </a>
+          </>
+        ) : null}
       </p>
 
       {updated ? (

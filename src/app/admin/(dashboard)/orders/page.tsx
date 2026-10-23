@@ -26,6 +26,7 @@ export default async function AdminOrdersPage({
     id: string;
     orderNumber: string;
     email: string;
+    phone: string;
     status: string;
     total: number;
     currency: string;
@@ -44,6 +45,7 @@ export default async function AdminOrdersPage({
       id: String(d._id),
       orderNumber: d.orderNumber,
       email: d.email,
+      phone: d.phone ?? "",
       status: d.status ?? "pending",
       total: d.total,
       currency: d.currency ?? "USD",
@@ -101,8 +103,13 @@ export default async function AdminOrdersPage({
                 className="flex items-center justify-between gap-4 py-4 text-[14px] hover:text-[var(--accent)]"
               >
                 <span className="w-32 font-medium tabular-nums">{order.orderNumber}</span>
-                <span className="hidden flex-1 truncate text-[var(--ink-2)] sm:block">
-                  {order.email}
+                <span className="hidden min-w-0 flex-1 truncate sm:block">
+                  <span className="block truncate text-[var(--ink-2)]">{order.email}</span>
+                  {order.phone ? (
+                    <span className="block truncate text-[13px] text-[var(--ink-2)]">
+                      {order.phone}
+                    </span>
+                  ) : null}
                 </span>
                 <span className="hidden w-20 text-[var(--ink-2)] md:block">
                   {order.itemCount} item{order.itemCount === 1 ? "" : "s"}
