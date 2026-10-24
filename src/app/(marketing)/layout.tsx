@@ -7,7 +7,10 @@ import { siteGraphJsonLd } from "@/lib/seo";
 
 // Contact details and the WhatsApp number are editable from Admin -> Settings.
 // These pages are cached and revalidated after a save (plus this safety net).
-export const revalidate = 300;
+// Keep this long: every marketing route inherits it, and each regeneration is
+// a billable ISR write plus an origin transfer. Admin saves call
+// revalidatePath("/", "layout") so changes still go live immediately.
+export const revalidate = 3600;
 
 export default async function MarketingLayout({
   children,
