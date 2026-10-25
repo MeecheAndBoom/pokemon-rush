@@ -27,7 +27,11 @@ const schema = z.object({
   phone: z.string().trim().min(1, "Phone number is required"),
   paymentMethod: z.string(),
   lines: z.array(lineSchema).min(1),
-  shippingAddress: z.record(z.string(), z.string()).optional(),
+  shippingAddress: z
+    .record(z.string(), z.string())
+    .refine((addr) => Boolean(addr?.country && addr.country.trim()), {
+      message: "Country is required",
+    }),
   billingAddress: z.record(z.string(), z.string()).optional(),
   notes: z.string().optional(),
 });

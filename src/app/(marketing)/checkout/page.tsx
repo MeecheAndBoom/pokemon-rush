@@ -246,6 +246,7 @@ export default function CheckoutPage() {
                   id="country"
                   name="country"
                   required
+                  aria-required="true"
                   autoComplete="country-name"
                   className={inputClass}
                 />
