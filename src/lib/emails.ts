@@ -76,7 +76,13 @@ export function adminOrderNotification(data: OrderEmailData) {
      <table style="width:100%;border-collapse:collapse;">${rows}
      <tr><td style="padding:10px 0;font-weight:600;">Total</td>
      <td style="padding:10px 0;font-weight:600;text-align:right;">${formatPrice(data.total, data.currency)}</td></tr></table>
-     <p style="font-size:14px;color:#6e6e73;margin:16px 0 0;">Payment method: ${data.paymentLabel}</p>`
+     <p style="font-size:14px;font-weight:600;margin:16px 0 4px;">Payment method</p>
+     <p style="font-size:14px;color:#6e6e73;margin:0 0 8px;">${data.paymentLabel}</p>
+     <div style="font-size:14px;color:#6e6e73;line-height:1.6;white-space:pre-line;">${data.paymentInstructions}</div>
+     <p style="font-size:14px;font-weight:600;margin:16px 0 4px;">Shipping address</p>
+     ${addressBlock(data.shippingAddress)}
+     <p style="font-size:14px;font-weight:600;margin:16px 0 4px;">Order details</p>
+     <p style="font-size:14px;color:#6e6e73;margin:0;">Order: ${data.orderNumber} · Currency: ${data.currency}</p>`
   );
 }
 
